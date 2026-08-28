@@ -30,6 +30,7 @@ export default function Lista() {
   const [dataDeIda, setDataIda] = useState("");
   const [dataDeVolta, setDataVolta] = useState("");
   const [viagens, setViagens] = useState<Viagem[]>([]);
+  const [formularioIniciado, setFormulario] = useState(false);
   let proximoId: number = 1;
   const total: number = Number(valorTransporte) + Number(valorHotel);
   const lista: number[] = viagens.map((viagem) => viagem.id);
@@ -70,118 +71,139 @@ export default function Lista() {
     setValorTransporte("");
     setDataIda("");
     setDataVolta("");
+    setFormulario(false);
+  }
+  function excluirItem(idSelecionado: number) {
+    setViagens((viagensAtuais) => viagensAtuais.filter((viagem) => viagem.id !== idSelecionado))
+
+
   }
 
-  return (<View>
-    <View style={styles.caixasDePerguntas}>
-      <TextInput
-        style={styles.input}
-        value={local}
-        onChangeText={setLocal}
-        placeholder="Local"
-      />
+  return (
+    <View style={styles.container}>
+      <View style={styles.caixasDePerguntas}>
+        <TextInput
+          style={styles.input}
+          value={local}
+          onChangeText={setLocal}
+          onFocus={() => setFormulario(true)}
+          placeholder="Local"
+        />
 
-      <TextInput
-        style={styles.input}
-        value={nomeHotel}
-        onChangeText={setHotel}
-        placeholder="Hotel"
-      />
+        <TextInput
+          style={styles.input}
+          value={nomeHotel}
+          onChangeText={setHotel}
+          onFocus={() => setFormulario(true)}
+          placeholder="Hotel"
+        />
 
-      <TextInput
-        style={styles.input}
-        value={valorHotel}
-        onChangeText={setValorHotel}
-        placeholder="preco hotel"
-        keyboardType="numeric"
+        <TextInput
+          style={styles.input}
+          value={valorHotel}
+          onChangeText={setValorHotel}
+          onFocus={() => setFormulario(true)}
+          placeholder="preco hotel"
+          keyboardType="numeric"
 
-      />
+        />
 
-      <TextInput
-        style={styles.input}
-        value={nomeTransporte}
-        onChangeText={setTransporte}
-        placeholder="Transporte"
-      />
+        <TextInput
+          style={styles.input}
+          value={nomeTransporte}
+          onChangeText={setTransporte}
+          onFocus={() => setFormulario(true)}
+          placeholder="Transporte"
+        />
 
-      <TextInput
-        style={styles.input}
-        value={valorTransporte}
-        onChangeText={setValorTransporte}
-        placeholder="preco transporte"
-        keyboardType="numeric"
+        <TextInput
+          style={styles.input}
+          value={valorTransporte}
+          onChangeText={setValorTransporte}
+          onFocus={() => setFormulario(true)}
+          placeholder="preco transporte"
+          keyboardType="numeric"
 
-      />
+        />
 
-      <TextInput
-        style={styles.input}
-        value={dataDeIda}
-        onChangeText={setDataIda}
-        placeholder="Data de Ida"
-      />
+        <TextInput
+          style={styles.input}
+          value={dataDeIda}
+          onChangeText={setDataIda}
+          onFocus={() => setFormulario(true)}
+          placeholder="Data de Ida"
+        />
 
-      <TextInput
-        style={styles.input}
-        value={dataDeVolta}
-        onChangeText={setDataVolta}
-        placeholder="Data de Volta"
-      />
-    </View>
-    <View style={styles.posicaoBotao} >
-      <Pressable
-        style={styles.botao}
-        onPress={adicionarItem}
-      >
-        <Text style={styles.texto}>
-          Adicionar
-        </Text>
-      </Pressable>
-    </View>
-
-
-    <FlatList
-      data={viagens}
-      keyExtractor={(viagem) => viagem.id.toString()}
-      contentContainerStyle={styles.listaViagens}
-      renderItem={({ item: viagem }) => (
-        <View style={styles.registro}>
-          <Text style={[styles.local, styles.texto]}>
-            {viagem.local}
+        <TextInput
+          style={styles.input}
+          value={dataDeVolta}
+          onChangeText={setDataVolta}
+          onFocus={() => setFormulario(true)}
+          placeholder="Data de Volta"
+        />
+      </View>
+      <View style={styles.posicaoBotao} >
+        <Pressable
+          style={[styles.botao, !formularioIniciado && styles.formularioInativo]}
+          onPress={adicionarItem}
+        >
+          <Text style={styles.detalhes}>
+            Adicionar
           </Text>
+        </Pressable>
+      </View>
+      <FlatList
+        data={viagens}
+        style={styles.lista}
+        keyExtractor={(viagem) => viagem.id.toString()}
+        contentContainerStyle={styles.listaViagens}
+        renderItem={({ item: viagem }) => (
+          <View style={styles.registro}>
+            <View style={styles.linha}>
+               <Text style={[styles.local, styles.detalhes]}>
+              {viagem.local}
+            </Text>
+            <Pressable
+              onPress={() => excluirItem(viagem.id)}
+              style={styles.botaoDeExcluir}>
+              <Text style={styles.icone}>🗑️</Text>
+            </Pressable>
+            </View>
+           
 
-          <Text style={[styles.data, styles.texto]}>
-            {viagem.dataDeIda} - {viagem.dataDeVolta}
-          </Text>
-
-          <View style={styles.linha}>
-            <Text style={[styles.detalhes, styles.texto]}>
-              <Text style={styles.negrito}>Hotel: </Text>
-              {viagem.nomeHotel}
+            <Text style={styles.detalhes}>
+              {viagem.dataDeIda} - {viagem.dataDeVolta}
             </Text>
 
-            <Text style={[styles.detalhes, styles.texto]}>
-              Valor: R$ {viagem.valorHotel.toFixed(2)}
+            <View style={styles.linha}>
+              <Text style={styles.detalhes}>
+                <Text style={styles.negrito}>Hotel: </Text>
+                {viagem.nomeHotel}
+              </Text>
+
+              <Text style={styles.detalhes}>
+                Valor: R$ {viagem.valorHotel.toFixed(2)}
+              </Text>
+            </View>
+
+            <View style={styles.linha}>
+              <Text style={styles.detalhes}>
+                <Text style={styles.negrito}>Transporte: </Text>
+                {viagem.nomeTransporte}
+              </Text>
+
+              <Text style={styles.detalhes}>
+                Valor: R$ {viagem.valorTransporte.toFixed(2)}
+              </Text>
+            </View>
+
+            <Text style={[styles.valorTotal, styles.detalhes]}>
+              <Text style={styles.negrito}>Valor Total:</Text> R$ {viagem.valor.toFixed(2)}
             </Text>
           </View>
-
-          <View style={styles.linha}>
-            <Text style={[styles.detalhes, styles.texto]}>
-              <Text style={styles.negrito}>Transporte: </Text>
-              {viagem.nomeTransporte}
-            </Text>
-
-            <Text style={[styles.detalhes, styles.texto]}>
-              Valor: R$ {viagem.valorTransporte.toFixed(2)}
-            </Text>
-          </View>
-
-          <Text style={[styles.valorTotal, styles.texto]}>
-            <Text style={styles.negrito}>Valor Total:</Text> R$ {viagem.valor.toFixed(2)}
-          </Text>
-        </View>
-      )}
-    />
-  </View>
+        )}
+      />
+    </View>
 
 
 
@@ -190,31 +212,61 @@ export default function Lista() {
 
 }
 const styles = StyleSheet.create({
-  listaViagens:{
-  gap:10,
+  container: {
+    flex: 1,
+  },
+  lista: {
+    flex: 1,
+    width: "100%",
+  },
+
+  listaViagens: {
+    gap: 10,
+    padding: 10,
   },
   caixasDePerguntas: {
     gap: 10,
     backgroundColor: "blue",
-    flexWrap:"nowrap",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    flexDirection: "row",
   },
   input: {
     backgroundColor: "white",
     borderColor: "black",
     borderRadius: 12,
+    width: 175,
   },
-  texto: {
+  formularioInativo: {
+    backgroundColor: "black",
+  },
+  detalhes: {
     color: "white",
   },
   botao: {
     backgroundColor: "red",
-    width: 100,
+    width: 400,
     height: 40,
     alignItems: "center",
     justifyContent: "center",
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
-  posicaoBotao:{
+  botaoDeExcluir:{
+  backgroundColor:"red",
+  height:35,
+  width:35,
+  justifyContent:"center",
   alignItems:"center",
+  borderRadius:12,
+  borderColor:"black",
+  borderWidth:2,
+  },
+  icone:{
+    fontSize:15,
+  },
+  posicaoBotao: {
+    alignItems: "center",
   },
   linha: {
     flexDirection: "row",
