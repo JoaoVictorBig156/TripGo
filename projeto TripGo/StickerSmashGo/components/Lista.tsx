@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
   },
   caixasDePerguntas: {
     gap: 10,
-    backgroundColor: "blue",
+    backgroundColor: "#0177ff",
     flexWrap: "wrap",
     justifyContent: "center",
     flexDirection: "row",
@@ -238,13 +238,14 @@ const styles = StyleSheet.create({
     width: 175,
   },
   formularioInativo: {
-    backgroundColor: "black",
+    backgroundColor: "#3c3c3c",
+    opacity:0.7,
   },
   detalhes: {
     color: "white",
   },
   botao: {
-    backgroundColor: "red",
+    backgroundColor: "#d80909cc",
     width: 400,
     height: 40,
     alignItems: "center",
@@ -260,7 +261,7 @@ const styles = StyleSheet.create({
   alignItems:"center",
   borderRadius:12,
   borderColor:"black",
-  borderWidth:2,
+ 
   },
   icone:{
     fontSize:15,
@@ -274,7 +275,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   registro: {
-    backgroundColor: "blue",
+    backgroundColor: "#0177ff",
     borderRadius: 12,
   },
   negrito: {
