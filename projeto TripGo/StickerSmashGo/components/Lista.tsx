@@ -7,6 +7,7 @@ import {
   FlatList,
   StyleSheet,
   Alert,
+  ImageBackground,
 } from "react-native";
 
 type Viagem = {
@@ -152,7 +153,12 @@ export default function Lista() {
           </Text>
         </Pressable>
       </View>
-      <FlatList
+   <ImageBackground
+   source={require("../assets/images/Captura_de_tela_2026-08-28_215933-removebg-preview.png") }
+   style={styles.fundoLista}
+   imageStyle={styles.imagemFundo}
+   resizeMode="contain">
+    <FlatList
         data={viagens}
         style={styles.lista}
         keyExtractor={(viagem) => viagem.id.toString()}
@@ -203,6 +209,8 @@ export default function Lista() {
           </View>
         )}
       />
+   </ImageBackground>
+      
     </View>
 
 
@@ -219,8 +227,15 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
-
-  listaViagens: {
+  fundoLista:{
+  flex:1,
+  width:"100%",
+  
+  },
+  imagemFundo:{
+  opacity:0.50,
+  },
+   listaViagens: {
     gap: 10,
     padding: 10,
   },
