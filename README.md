@@ -1,12 +1,8 @@
 # TripGo
 
-TripGo — Projeto PAM I
+**TripGo** — Trabalho em Grupo de PAM I
 
----
-
-> [!IMPORTANT]
-> **Sua inscrição foi aceita!** Bem-vindos ao Trabalho em Grupo de PAM I.
-> Abaixo estão as fichas de entrega e os links das aulas que vocês vão precisar.
+Aplicativo mobile para a **organização de viagens** — viagens programadas, locação de veículos, passagens e hospedagens.
 
 ## Integrantes
 
@@ -14,9 +10,23 @@ TripGo — Projeto PAM I
 - Pedro Antônio Ledo Billato
 - João Pedro Viana Delfino
 
-## Tema
+## Como rodar o projeto
 
-Organização de viagens — viagens programadas, locação de veículos, passagens e hospedagens.
+Projeto criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo-app) (Expo / React Native).
+
+1. Instale as dependências (cria o `node_modules`)
+
+   ```bash
+   npm install
+   ```
+
+2. Inicie o app
+
+   ```bash
+   npx expo start --go
+   ```
+
+   > `npx expo start --go` abre o app no **Expo Go** no seu celular (escaneie o QR Code).
 
 ## Fichas de Entrega
 
