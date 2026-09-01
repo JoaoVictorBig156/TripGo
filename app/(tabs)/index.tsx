@@ -92,6 +92,13 @@ export default function Index() {
             </Text>
           </View>
 </Pressable>
+           <View>
+        <Pressable style={styles.pocisaoBotao}>
+          <Text style={styles.botaoAdicionar}>Adicionar</Text>
+        </Pressable>
+      </View>
+
+
          
 
         </View>
@@ -152,4 +159,13 @@ const styles = StyleSheet.create({
   fontSize:30,
   fontWeight:500,
   },
+   posicaoBotao:{
+  backgroundColor:'#011A43',
+  alightItems:'center',
+  },
+  botaoAdicionar:{
+  color:"white",
+  fontSize:20,
+  },
+
 })
