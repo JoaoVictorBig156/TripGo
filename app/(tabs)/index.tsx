@@ -8,15 +8,10 @@ import {
 } from "react-native";
 import {
   router
-}from "expo-router";
+} from "expo-router";
 
 
 export default function Index() {
-  function adicionar(){
-    Alert.alert('Ainda nao, Acalma-se 67')
-
-  }
-  
 
   return (
     <View style={styles.container}>
@@ -26,90 +21,88 @@ export default function Index() {
         <View style={styles.viagemCadastrada}>
           <Pressable
             onPress={() => router.push("/Gerenciamento")}>
-             <View>
-            <Text style={[styles.localizacao, styles.detalhe]}>Rio de Janeiro</Text>
-            <Text style={styles.detalhe}>26/08/26-29/08/26</Text>
-            <View style={styles.linha}></View>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Hotel</Text>: Santa Teresa............................R$440.00
-            </Text>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Transporte</Text>: Aviao............................R$3000.00
-            </Text>
+            <View>
+              <Text style={[styles.localizacao, styles.detalhe]}>Rio de Janeiro</Text>
+              <Text style={styles.detalhe}>26/08/26-29/08/26</Text>
+              <View style={styles.linha}></View>
+              <Text style={styles.detalhe}>
+                <Text style={styles.negrito}>Hotel</Text>: Santa Teresa............................R$440.00
+              </Text>
+              <Text style={styles.detalhe}>
+                <Text style={styles.negrito}>Transporte</Text>: Aviao............................R$3000.00
+              </Text>
 
-          </View>
-          <View style={styles.posicaoValor}>
-            <Text style={styles.valor}>
-              <Text style={styles.negrito}>Valor Total</Text>
-              : R$ 3440.00
-            </Text>
-          </View>
+            </View>
+            <View style={styles.posicaoValor}>
+              <Text style={styles.valor}>
+                <Text style={styles.negrito}>Valor Total</Text>
+                : R$ 3440.00
+              </Text>
+            </View>
           </Pressable>
-         
+
 
 
 
         </View>
-        
+
         <View style={styles.viagemCadastrada}>
           <Pressable
-            onPress={() => router.push("/Gerenciamento")}>
-          <View>
-            <Text style={[styles.localizacao, styles.detalhe]}>Belo Horizonte</Text>
-            <Text style={styles.detalhe}>23/08/26-30/08/26</Text>
-            <View style={styles.linha}></View>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Hotel</Text>: Tulip Inn Bauru........................R$650.00
-            </Text>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Transporte</Text>: Carro............................R$334.00
-            </Text>
+            onPress={() => router.push("/Gerenciamento2")}>
+            <View>
+              <Text style={[styles.localizacao, styles.detalhe]}>Belo Horizonte</Text>
+              <Text style={styles.detalhe}>23/08/26-30/08/26</Text>
+              <View style={styles.linha}></View>
+              <Text style={styles.detalhe}>
+                <Text style={styles.negrito}>Hotel</Text>: Tulip Inn Bauru........................R$650.00
+              </Text>
+              <Text style={styles.detalhe}>
+                <Text style={styles.negrito}>Transporte</Text>: Carro............................R$334.00
+              </Text>
 
-          </View>
-          <View style={styles.posicaoValor}>
-            <Text style={styles.valor}>
-              <Text style={styles.negrito}>Valor Total</Text>
-              : R$ 984.00
-            </Text>
-          </View>
-        </Pressable>
+            </View>
+            <View style={styles.posicaoValor}>
+              <Text style={styles.valor}>
+                <Text style={styles.negrito}>Valor Total</Text>
+                : R$ 984.00
+              </Text>
+            </View>
+          </Pressable>
 
         </View>
-        <View style={styles.viagemCadastrada}>
+         <View style={styles.viagemCadastrada}>
           <Pressable
-            onPress={() => router.push("/Gerenciamento")}>
-          <View>
-            <Text style={[styles.localizacao, styles.detalhe]}>Curitiba</Text>
-            <Text style={styles.detalhe}>14/07/26-19/07/26</Text>
-            <View style={styles.linha}></View>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Hotel</Text>: Campina do Sirena...............................200.00
-            </Text>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Transporte</Text>: Navio............................R$3678.00
-            </Text>
+            onPress={() => router.push("/Gerenciamento3")}>
+            <View>
+              <Text style={[styles.localizacao, styles.detalhe]}>Curitiba</Text>
+              <Text style={styles.detalhe}>17/07/26-19/07/26</Text>
+              <View style={styles.linha}></View>
+              <Text style={styles.detalhe}>
+                <Text style={styles.negrito}>Hotel</Text>: Campina do Serena................R$200.00
+              </Text>
+              <Text style={styles.detalhe}>
+                <Text style={styles.negrito}>Transporte</Text>: Navio............................R$3678.00
+              </Text>
 
-          </View>
-          <View style={styles.posicaoValor}>
-            <Text style={styles.valor}>
-              <Text style={styles.negrito}>Valor Total</Text>
-              : R$ 3878.00
-            </Text>
-          </View>
-</Pressable>
-           <View>
-        <Pressable 
-        style={styles.posicaoBotao}
-        onPress={() => Alert.alert('Ainda nao, Acalma-se 67')}>
-          
-          <Text style={styles.botaoAdicionar}>Adicionar</Text>
-        </Pressable>
-      </View>
-
-
-         
+            </View>
+            <View style={styles.posicaoValor}>
+              <Text style={styles.valor}>
+                <Text style={styles.negrito}>Valor Total</Text>
+                : R$ 3878.00
+              </Text>
+            </View>
+          </Pressable>
 
         </View>
+       
+        <View>
+            <Pressable
+              style={styles.posicaoBotao}
+              onPress={() => Alert.alert('Ainda nao, Acalma-se 67')}>
+
+              <Text style={styles.botaoAdicionar}>Adicionar</Text>
+            </Pressable>
+          </View>
       </View>
 
     </View>
@@ -131,13 +124,13 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     width: 300,
     margin: 5,
-    height: 200,
+    height: 180,
     flexDirection: "column",
 
   },
   posicaoCadastros: {
-   flexDirection:"column",
-   alignItems:"center",
+    flexDirection: "column",
+    alignItems: "center",
   },
   negrito: {
     fontWeight: 500,
@@ -145,7 +138,7 @@ const styles = StyleSheet.create({
   valor: {
     color: "white",
     fontSize: 25,
-    marginInlineEnd:10,
+    marginInlineEnd: 10,
 
   },
   posicaoValor: {
@@ -153,31 +146,31 @@ const styles = StyleSheet.create({
     height: 75,
     justifyContent: "flex-end",
   },
-  linha:{
-  width:280,
-  height:1,
-  backgroundColor:"white",
-  marginInlineStart:10,
-  opacity:0.80,
+  linha: {
+    width: 280,
+    height: 1,
+    backgroundColor: "white",
+    marginInlineStart: 10,
+    opacity: 0.80,
   },
-  titulo:{
-    alignItems:"center",
+  titulo: {
+    alignItems: "center",
   },
-  estiloTitulo:{
-  fontSize:30,
-  fontWeight:500,
+  estiloTitulo: {
+    fontSize: 30,
+    fontWeight: 500,
   },
-   posicaoBotao:{
-  alignItems:'center',
-  
+  posicaoBotao: {
+    alignItems: "center",
   },
-  botaoAdicionar:{
-  color:"white",
-  fontSize:20,
-  width:250,
-  alignItems:'center',
-  justifyContent:'center',
-  backgroundColor:'#011A43',
+  botaoAdicionar: {
+    color: "white",
+    fontSize: 20,
+    height:40,
+    width: 250,
+    backgroundColor: '#011A43',
+    borderRadius:12,
   },
+ 
 
 })
