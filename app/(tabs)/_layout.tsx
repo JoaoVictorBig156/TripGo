@@ -28,7 +28,34 @@ export default function TabLayout() {
       <Tabs.Screen
         name="Gerenciamento"
         options={{
-          title: 'Detalhes das Viagens',
+          title: 'Detalhe da Viagem 1',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "briefcase-outline" : 'briefcase-outline'}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="Gerenciamento2"
+        options={{
+          title: 'Detalhe da Viagem 2',
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name={focused ? "briefcase-outline" : 'briefcase-outline'}
+              color={color}
+              size={24}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Gerenciamento3"
+        options={{
+          title: 'Detalhe da Viagem 3',
           tabBarIcon: ({ color, focused }) => (
             <Ionicons
               name={focused ? "briefcase-outline" : 'briefcase-outline'}
@@ -39,5 +66,6 @@ export default function TabLayout() {
         }}
       />
     </Tabs>
+    
   );
 }
