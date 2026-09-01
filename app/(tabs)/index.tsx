@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Pressable
+  Pressable,
+  Alert
 } from "react-native";
 import {
   router
@@ -11,6 +12,10 @@ import {
 
 
 export default function Index() {
+  function adicionar(){
+    Alert.alert('Ainda nao, Acalma-se 67')
+
+  }
   
 
   return (
@@ -92,6 +97,16 @@ export default function Index() {
             </Text>
           </View>
 </Pressable>
+           <View>
+        <Pressable 
+        style={styles.posicaoBotao}
+        onPress={() => Alert.alert('Ainda nao, Acalma-se 67')}>
+          
+          <Text style={styles.botaoAdicionar}>Adicionar</Text>
+        </Pressable>
+      </View>
+
+
          
 
         </View>
@@ -152,4 +167,17 @@ const styles = StyleSheet.create({
   fontSize:30,
   fontWeight:500,
   },
+   posicaoBotao:{
+  alignItems:'center',
+  
+  },
+  botaoAdicionar:{
+  color:"white",
+  fontSize:20,
+  width:250,
+  alignItems:'center',
+  justifyContent:'center',
+  backgroundColor:'#011A43',
+  },
+
 })
