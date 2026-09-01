@@ -1,8 +1,13 @@
+import React from "react";
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  Pressable
 } from "react-native";
+import {
+  router
+}from "expo-router";
 
 
 export default function Index() {
@@ -14,7 +19,9 @@ export default function Index() {
       </View>
       <View style={styles.posicaoCadastros}>
         <View style={styles.viagemCadastrada}>
-          <View>
+          <Pressable
+            onPress={() => router.push("/Gerenciamento")}>
+             <View>
             <Text style={[styles.localizacao, styles.detalhe]}>Rio de Janeiro</Text>
             <Text style={styles.detalhe}>26/08/26-29/08/26</Text>
             <View style={styles.linha}></View>
@@ -32,12 +39,16 @@ export default function Index() {
               : R$ 3440.00
             </Text>
           </View>
+          </Pressable>
+         
 
 
 
         </View>
         
         <View style={styles.viagemCadastrada}>
+          <Pressable
+            onPress={() => router.push("/Gerenciamento")}>
           <View>
             <Text style={[styles.localizacao, styles.detalhe]}>Belo Horizonte</Text>
             <Text style={styles.detalhe}>23/08/26-30/08/26</Text>
@@ -56,11 +67,12 @@ export default function Index() {
               : R$ 984.00
             </Text>
           </View>
-
-
+        </Pressable>
 
         </View>
         <View style={styles.viagemCadastrada}>
+          <Pressable
+            onPress={() => router.push("/Gerenciamento")}>
           <View>
             <Text style={[styles.localizacao, styles.detalhe]}>Curitiba</Text>
             <Text style={styles.detalhe}>14/07/26-19/07/26</Text>
@@ -79,8 +91,8 @@ export default function Index() {
               : R$ 3878.00
             </Text>
           </View>
-
-
+</Pressable>
+         
 
         </View>
       </View>
