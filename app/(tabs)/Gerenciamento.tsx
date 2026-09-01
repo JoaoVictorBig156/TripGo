@@ -9,11 +9,11 @@ export default function Gerenciamento() {
         <View style={styles.container}>
             <View>
                 <View style={styles.detalhesViagem}>
-                    <Text style={[styles.titulo,styles.coloracaoTexto]}>
+                        <Text style={[styles.titulo,styles.coloracaoTexto]}>
                      Detalhes da viagem ao Rio de Janeiro:
                     </Text>
                     <Text style={[styles.detalhesTexto,styles.coloracaoTexto]}>
-                     uma viagem inesquecivel ao Rio de janeiro onde o viajante ira ficar, de 26/08/26 à 29/08/26, hospedado no Hotel
+                     Uma viagem inesquecivel ao Rio de janeiro onde o viajante ira ficar, de 26/08/26 à 29/08/26, hospedado no Hotel
                      Santa Teresa experienciando as mais belas vistas e as mais incriveis atrações que se pode imaginar. Chegará a 
                      seu destino por meio de um aviao e voltara pelo mesmo.
                     </Text>
