@@ -1,4 +1,8 @@
 import { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const CHAVE_LISTA = '@lista_de_itens';
+
 
 export type Viagem = {
   id: number;
@@ -12,22 +16,45 @@ export type Viagem = {
   dataDeVolta: string;
   qtdPessoas: number;
 };
-export function funcoes(){
-     const [local, setLocal] = useState("");
-      const [nomeHotel, setHotel] = useState("");
-      const [valorHotel, setValorHotel] = useState("");
-      const [nomeTransporte, setTransporte] = useState("");
-      const [valorTransporte, setValorTransporte] = useState("");
-      const [dataDeIda, setDataIda] = useState("");
-      const [dataDeVolta, setDataVolta] = useState("");
-      const [qtdPessoas, setQtdPessoas] = useState("");
-      const [viagens, setViagens] = useState<Viagem[]>([]);
-      const [formularioIniciado, setFormulario] = useState(false);
-      let proximoId: number = 1;
-      const total: number = Number(valorTransporte) + Number(valorHotel);
-      const lista: number[] = viagens.map((viagem) => viagem.id);
-    
-    if (viagens.length > 0) {
+export function useFuncoes() {
+  const [local, setLocal] = useState("");
+  const [nomeHotel, setHotel] = useState("");
+  const [valorHotel, setValorHotel] = useState("");
+  const [nomeTransporte, setTransporte] = useState("");
+  const [valorTransporte, setValorTransporte] = useState("");
+  const [dataDeIda, setDataIda] = useState("");
+  const [dataDeVolta, setDataVolta] = useState("");
+  const [qtdPessoas, setQtdPessoas] = useState("");
+  const [viagens, setViagens] = useState<Viagem[]>([]);
+  const [formularioIniciado, setFormulario] = useState(false);
+  let proximoId: number = 1;
+  const total: number = Number(valorTransporte) + Number(valorHotel);
+  const lista: number[] = viagens.map((viagem) => viagem.id);
+
+  const salvarLista = async (novaViagem: Viagem[]) => {
+    try {
+      const json = JSON.stringify(novaViagem);
+      await AsyncStorage.setItem(CHAVE_LISTA, json);
+    } catch (e) {
+      console.warn('Erro ao salvar:', e);
+    }
+  };
+
+  const carregarLista = async (): Promise<Viagem[]> => {
+    try {
+      const dadosSalvos = await AsyncStorage.getItem(CHAVE_LISTA);
+
+      if (dadosSalvos !== null) {
+        return JSON.parse(dadosSalvos);
+      }
+      return [];
+    } catch (e) {
+      console.warn('Erro ao carregar:', e);
+      return [];
+    }
+  };
+
+  if (viagens.length > 0) {
     let maior: number = lista[0];
     for (let i = 0; i < lista.length; i++) {
 
@@ -40,8 +67,7 @@ export function funcoes(){
   }
 
 
-  function adicionarItem() {
-
+  const adicionarItem = async () => {
     const novaViagem: Viagem = {
       id: proximoId,
       local,
@@ -55,8 +81,10 @@ export function funcoes(){
       qtdPessoas: Number(qtdPessoas)
 
     };
+    const listaNova = [...viagens, novaViagem];
 
-    setViagens([...viagens, novaViagem]);
+    setViagens(listaNova);
+    await salvarLista(listaNova);
     setLocal("");
     setHotel("");
     setValorHotel("");
@@ -64,15 +92,19 @@ export function funcoes(){
     setValorTransporte("");
     setDataIda("");
     setDataVolta("");
-    setQtdPessoas(""),
-      setFormulario(false);
-  }
-  function excluirItem(idSelecionado: number) {
-    setViagens((viagensAtuais) => viagensAtuais.filter((viagem) => viagem.id !== idSelecionado))
+    setQtdPessoas("");
+    setFormulario(false);
+  };
 
 
+  async function excluirItem(idSelecionado: number) {
+    const exclusaoDeItem = viagens.filter((viagem) => viagem.id !== idSelecionado)
+
+    setViagens(exclusaoDeItem);
+    await salvarLista(exclusaoDeItem);
   }
- return{
+
+  return {
     local,
     setLocal,
     qtdPessoas,
@@ -94,9 +126,11 @@ export function funcoes(){
     formularioIniciado,
     setFormulario,
     adicionarItem,
-    excluirItem
- }
-   
+    excluirItem,
+    carregarLista,
+    salvarLista
+  }
 
- ;
+
+    ;
 }
