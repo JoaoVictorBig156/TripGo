@@ -6,8 +6,10 @@ import {
   FlatList,
   ImageBackground,
 } from "react-native";
-import{useFuncoes} from "../components/funcoes_lista"
-import{styles} from "../components/estilizacao_Lista"
+import { useCallback } from "react";
+import { useFocusEffect } from "expo-router"; 
+import { useFuncoes } from "../components/funcoes_lista"
+import { styles } from "../components/estilizacao_Lista"
 
 
 export default function Lista() {
@@ -33,8 +35,18 @@ export default function Lista() {
     formularioIniciado,
     setFormulario,
     adicionarItem,
-    excluirItem} = useFuncoes();
- 
+    excluirItem,
+    carregarLista } = useFuncoes();
+
+  useFocusEffect(useCallback(() => {
+    const inicializar = async () => {
+      const dadosRecuperados = await carregarLista();
+      setViagens(dadosRecuperados);
+  };
+
+    inicializar();
+  }, []));
+
   return (
     <View style={styles.container}>
       <View style={styles.caixasDePerguntas}>
@@ -120,6 +132,7 @@ export default function Lista() {
         style={styles.fundoLista}
         imageStyle={styles.imagemFundo}
         resizeMode="contain">
+
         <FlatList
           data={viagens}
           style={styles.lista}
