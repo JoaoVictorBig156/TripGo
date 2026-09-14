@@ -1,17 +1,34 @@
 import React from "react";
+
+import { useState, useCallback } from "react";
+
 import {
   View,
   Text,
   StyleSheet,
   Pressable,
   Image,
+  ScrollView
 } from "react-native";
 import {
-  router
+  router,
+  useFocusEffect
 } from "expo-router";
-
+import { useFuncoes, Viagem } from "../components/funcoes_lista"
 
 export default function Index() {
+
+  const { carregarLista } = useFuncoes();
+  const [viagens, setViagens] = useState<Viagem[]>([]);
+
+  useFocusEffect(useCallback(() => {
+    const inicializar = async () => {
+      const dadosRecuperados = await carregarLista();
+      setViagens(dadosRecuperados);
+    };
+
+    inicializar();
+  }, []));
 
   return (
     <View style={styles.container}>
@@ -21,89 +38,56 @@ export default function Index() {
           style={styles.imagem}
         />
       </View>
-      <View style={styles.titulo}>
-      </View>
+
       <View style={styles.posicaoCadastros}>
-        <View style={styles.viagemCadastrada}>
-          <View>
-            <Text style={[styles.localizacao, styles.detalhe]}>Rio de Janeiro</Text>
-            <Text style={styles.detalhe}>26/08/26-29/08/26</Text>
-            <View style={styles.linha}></View>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Hotel</Text>: Santa Teresa............................R$440.00
-            </Text>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Transporte</Text>: Aviao............................R$3000.00
-            </Text>
+        {viagens.length === 0 ? (
+          <Text style={{ color: "#666", fontSize: 16 }}>
+            Nenhuma viagem cadastrada ainda.
+          </Text>
+        ) : (
+          viagens.map((viagem) => (
 
-          </View>
-          <View style={styles.posicaoValor}>
-            <Text style={styles.valor}>
-              <Text style={styles.negrito}>Valor Total</Text>
-              : R$ 3440.00
-            </Text>
-          </View>
+            <View key={viagem.id} style={styles.viagemCadastrada}>
+              <View>
+                <Text style={[styles.localizacao, styles.detalhe]}>{viagem.local}</Text>
+                <Text style={styles.detalhe}>26/08/26-29/08/26</Text>
+                <View style={styles.linha}></View>
+                <Text style={styles.detalhe}>
+                  <Text style={styles.negrito}>Hotel</Text>: Santa Teresa............................R$440.00
+                </Text>
+                <Text style={styles.detalhe}>
+                  <Text style={styles.negrito}>Transporte</Text>: Aviao............................R$3000.00
+                </Text>
+
+              </View>
+              <View style={styles.posicaoValor}>
+                <Text style={styles.valor}>
+                  <Text style={styles.negrito}>Valor Total</Text>
+                  : R$ 3440.00
+                </Text>
+              </View>
+            </View>
+
+          ))
+        )}
 
 
-
-
-        </View>
-
-        <View style={styles.viagemCadastrada}>
-          <View>
-            <Text style={[styles.localizacao, styles.detalhe]}>Belo Horizonte</Text>
-            <Text style={styles.detalhe}>23/08/26-30/08/26</Text>
-            <View style={styles.linha}></View>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Hotel</Text>: Tulip Inn Bauru........................R$650.00
-            </Text>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Transporte</Text>: Carro............................R$334.00
-            </Text>
-
-          </View>
-          <View style={styles.posicaoValor}>
-            <Text style={styles.valor}>
-              <Text style={styles.negrito}>Valor Total</Text>
-              : R$ 984.00
-            </Text>
-          </View>
-
-        </View>
-        <View style={styles.viagemCadastrada}>
-          <View>
-            <Text style={[styles.localizacao, styles.detalhe]}>Curitiba</Text>
-            <Text style={styles.detalhe}>17/07/26-19/07/26</Text>
-            <View style={styles.linha}></View>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Hotel</Text>: Campina do Serena................R$200.00
-            </Text>
-            <Text style={styles.detalhe}>
-              <Text style={styles.negrito}>Transporte</Text>: Navio............................R$3678.00
-            </Text>
-
-          </View>
-          <View style={styles.posicaoValor}>
-            <Text style={styles.valor}>
-              <Text style={styles.negrito}>Valor Total</Text>
-              : R$ 3878.00
-            </Text>
-          </View>
-
-        </View>
-
-        <View>
-          <Pressable
-            style={styles.estiloBotao}
-            onPress={() => router.push("/Lista")}>
-            <Text style={styles.botaoTextoAdicionar}>Adicionar</Text>
-          </Pressable>
-        </View>
+      </View>
+      <View style={styles.botao}>
+        <Pressable
+          style={styles.estiloBotao}
+          onPress={() => router.push("/Lista")}>
+          <Text style={styles.botaoTextoAdicionar}>Adicionar</Text>
+        </Pressable>
       </View>
 
     </View>
   );
+
+
+
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -128,6 +112,8 @@ const styles = StyleSheet.create({
   posicaoCadastros: {
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
+    height: 600,
   },
   negrito: {
     fontWeight: 500,
@@ -169,12 +155,15 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 20,
   },
-   imagem:{
-    width:80,
-    height:80,
-    borderRadius:24,
-    borderWidth:0.8,
-   }
+  imagem: {
+    width: 80,
+    height: 80,
+    borderRadius: 24,
+    borderWidth: 0.8,
+  },
+  botao: {
+    alignItems: "center",
+  }
 
 
 })
