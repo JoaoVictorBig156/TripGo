@@ -1,7 +1,7 @@
 import React from "react";
-
+ 
 import { useState, useCallback } from "react";
-
+ 
 import {
   View,
   Text,
@@ -15,21 +15,21 @@ import {
   useFocusEffect
 } from "expo-router";
 import { useFuncoes, Viagem } from "../components/funcoes_lista"
-
+ 
 export default function Index() {
-
+ 
   const { carregarLista } = useFuncoes();
   const [viagens, setViagens] = useState<Viagem[]>([]);
-
+ 
   useFocusEffect(useCallback(() => {
     const inicializar = async () => {
       const dadosRecuperados = await carregarLista();
       setViagens(dadosRecuperados);
     };
-
+ 
     inicializar();
   }, []));
-
+ 
   return (
     <View style={styles.container}>
       <View>
@@ -38,7 +38,7 @@ export default function Index() {
           style={styles.imagem}
         />
       </View>
-
+ 
       <View style={styles.posicaoCadastros}>
         {viagens.length === 0 ? (
           <Text style={{ color: "#666", fontSize: 16 }}>
@@ -46,32 +46,32 @@ export default function Index() {
           </Text>
         ) : (
           viagens.map((viagem) => (
-
+ 
             <View key={viagem.id} style={styles.viagemCadastrada}>
               <View>
                 <Text style={[styles.localizacao, styles.detalhe]}>{viagem.local}</Text>
-                <Text style={styles.detalhe}>26/08/26-29/08/26</Text>
+                <Text style={styles.detalhe}>{viagem.dataDeIda} - {viagem.dataDeVolta}</Text>
                 <View style={styles.linha}></View>
                 <Text style={styles.detalhe}>
-                  <Text style={styles.negrito}>Hotel</Text>: Santa Teresa............................R$440.00
+                  <Text style={styles.negrito}>Hotel</Text>{viagem.nomeHotel}............................{viagem.valorHotel}
                 </Text>
                 <Text style={styles.detalhe}>
-                  <Text style={styles.negrito}>Transporte</Text>: Aviao............................R$3000.00
+                  <Text style={styles.negrito}>Transporte</Text>:{viagem.nomeTransporte}............................{viagem.valorTransporte}
                 </Text>
-
+ 
               </View>
               <View style={styles.posicaoValor}>
                 <Text style={styles.valor}>
                   <Text style={styles.negrito}>Valor Total</Text>
-                  : R$ 3440.00
+                  : {viagem.valor}
                 </Text>
               </View>
             </View>
-
+ 
           ))
         )}
-
-
+ 
+ 
       </View>
       <View style={styles.botao}>
         <Pressable
@@ -80,14 +80,14 @@ export default function Index() {
           <Text style={styles.botaoTextoAdicionar}>Adicionar</Text>
         </Pressable>
       </View>
-
+ 
     </View>
   );
-
-
-
+ 
+ 
+ 
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     margin: 5,
     height: 180,
     flexDirection: "column",
-
+ 
   },
   posicaoCadastros: {
     flexDirection: "column",
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 25,
     marginInlineEnd: 10,
-
+ 
   },
   posicaoValor: {
     alignItems: "flex-end",
@@ -164,6 +164,6 @@ const styles = StyleSheet.create({
   botao: {
     alignItems: "center",
   }
-
-
+ 
+ 
 })
