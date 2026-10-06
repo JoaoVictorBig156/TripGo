@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=R&color=orange)
 
-**Nota atual: R** · 36% (20/55 pontos) · rodada de 2026-10-06 00:37:04 · commit `e03f62e`
+**Nota atual: R** · 36% (20/55 pontos) · rodada de 2026-10-06 00:38:34 · commit `75b0356`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -26,7 +26,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Existe tela de LISTAGEM — `app/Lista.tsx`
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
 - [ ] **(+1 pts)** Existe tela de FORMULÁRIO — `—`
-- [ ] **(+1 pts)** Existe tela de DETALHE — `app/Detalhes.tsx`
+- [ ] **(+1 pts)** Existe tela de DETALHE — `app/detalhe.tsx`
 - [x] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `todos os imports resolvem`
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
 - [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `4 arquivos de tela`
@@ -37,9 +37,9 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Existe import do AsyncStorage no código — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Storage faz leitura com AsyncStorage.getItem — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Storage grava com AsyncStorage.setItem — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Detalhes.tsx`
+- [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Lista.tsx`
 - [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Detalhes.tsx`
+- [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/detalhe.tsx`
 - [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/Lista.tsx`
 - [ ] **(+1 pts)** Formulário lê entradas com TextInput — `—`
 - [ ] **(+1 pts)** Formulário salva chamando adicionar/salvar — `—`
