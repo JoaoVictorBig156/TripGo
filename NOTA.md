@@ -6,32 +6,32 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=R&color=orange)
 
-**Nota atual: R** · 33% (18/55 pontos) · rodada de 2026-10-06 00:36:13 · commit `1ce5e16`
+**Nota atual: R** · 36% (20/55 pontos) · rodada de 2026-10-06 00:37:04 · commit `e03f62e`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
 | Fase | Pontos | Situação |
 |---|---|---|
-| Fase 1 — Estrutura | 7/10 | em desenvolvimento |
-| Fase 2 — AsyncStorage | 9/15 | em desenvolvimento |
+| Fase 1 — Estrutura | 8/10 | em desenvolvimento |
+| Fase 2 — AsyncStorage | 10/15 | em desenvolvimento |
 | Fase 3 — SQLite | 2/30 | iniciando |
 
 ## Checklist validado
 
-### Fase 1 — Estrutura do projeto (7/10 pts)
+### Fase 1 — Estrutura do projeto (8/10 pts)
 
 - [x] **(+1 pts)** README.md existe e fala do projeto/grupo — `README.md`
 - [x] **(+1 pts)** Arquivo principal do app existe (app/index.tsx) — `app/index.tsx`
 - [x] **(+1 pts)** package.json existe com a dependência "expo" — `expo ^57.0.22`
-- [ ] **(+1 pts)** Existe tela de LISTAGEM — `app/Lista.tsx`
+- [x] **(+1 pts)** Existe tela de LISTAGEM — `app/Lista.tsx`
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
 - [ ] **(+1 pts)** Existe tela de FORMULÁRIO — `—`
 - [ ] **(+1 pts)** Existe tela de DETALHE — `app/Detalhes.tsx`
 - [x] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `todos os imports resolvem`
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
-- [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `3 arquivos de tela`
+- [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `4 arquivos de tela`
 
-### Fase 2 — Persistência com AsyncStorage (9/15 pts)
+### Fase 2 — Persistência com AsyncStorage (10/15 pts)
 
 - [x] **(+1 pts)** Dependência async-storage está no package.json — `no package.json`
 - [x] **(+1 pts)** Existe import do AsyncStorage no código — `components/funcoes_lista.ts`
@@ -40,10 +40,10 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Detalhes.tsx`
 - [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Detalhes.tsx`
-- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/formulario.tsx`
+- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/Lista.tsx`
 - [ ] **(+1 pts)** Formulário lê entradas com TextInput — `—`
 - [ ] **(+1 pts)** Formulário salva chamando adicionar/salvar — `—`
-- [ ] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
+- [x] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
 - [ ] **(+1 pts)** Tela de detalhe usa busca/dados do storage — `—`
 - [ ] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `—`
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
