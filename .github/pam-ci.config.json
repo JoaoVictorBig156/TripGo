@@ -3,8 +3,8 @@
   "raiz": ".",
   "principal": "app/index.tsx",
   "lista": "app/Lista.tsx",
-  "form": "",
-  "detalhe": "",
+  "form": "components/funcoes_lista.tsx",
+  "detalhe": "app/Detalhe.tsx",
   "dados": ["components/funcoes_lista.ts"],
   "storage": "components/funcoes_lista.ts",
   "sqlite": ""
