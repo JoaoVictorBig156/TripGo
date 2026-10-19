@@ -4,7 +4,7 @@
     "slug": "TripGo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/iconTripGo.png",
     "scheme": "stickersmashgo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
