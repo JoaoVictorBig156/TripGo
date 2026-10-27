@@ -77,6 +77,7 @@ Projeto criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo
 
 
 
+
 ---
 
 ## Colaboração por integrante
