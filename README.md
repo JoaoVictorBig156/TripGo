@@ -73,6 +73,7 @@ Projeto criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo
 > Material completo do curso: [PAM I](https://etec-bento-quirino.github.io/Programacao-Aplicativos-Moveis-I/)
 
 
+
 ---
 
 ## Colaboração por integrante
@@ -81,10 +82,8 @@ Projeto criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo
 
 | # | Integrante | Commits | Participação |
 |---|------------|---------|--------------|
-| 1 | pedrobillato | 12 | 31.6% ██████░░░░░░░░░░░░░░ |
-| 2 | JoaoVictorBig156 | 10 | 26.3% █████░░░░░░░░░░░░░░░ |
-| 3 | JaoViana327 | 8 | 21.1% ████░░░░░░░░░░░░░░░░ |
-| 4 | Pedro Billato | 6 | 15.8% ███░░░░░░░░░░░░░░░░░ |
-| 5 | João Victor Ramalho de Oliveira | 2 | 5.3% █░░░░░░░░░░░░░░░░░░░ |
+| 1 | Pedro Billato | 18 | 47.4% █████████░░░░░░░░░░░ |
+| 2 | João Victor Ramalho de Oliveira | 12 | 31.6% ██████░░░░░░░░░░░░░░ |
+| 3 | João Viana | 8 | 21.1% ████░░░░░░░░░░░░░░░░ |
 
 **Total de commits considerados:** 38
