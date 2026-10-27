@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=R&color=orange)
 
-**Nota atual: R** · 45% (25/55 pontos) · rodada de 2026-10-27 00:12:29 · commit `4e0a8b4`
+**Nota atual: R** · 45% (25/55 pontos) · rodada de 2026-10-27 00:36:11 · commit `303dda3`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -22,7 +22,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 
 - [x] **(+1 pts)** README.md existe e fala do projeto/grupo — `README.md`
 - [x] **(+1 pts)** Arquivo principal do app existe (app/index.tsx) — `app/index.tsx`
-- [x] **(+1 pts)** package.json existe com a dependência "expo" — `expo ^57.0.22`
+- [x] **(+1 pts)** package.json existe com a dependência "expo" — `expo ~57.0.31`
 - [x] **(+1 pts)** Existe tela de LISTAGEM — `app/Lista.tsx`
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Existe tela de FORMULÁRIO — `app/Lista.tsx`
