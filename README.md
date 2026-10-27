@@ -10,7 +10,7 @@
 | Fase | Pontos |
 |------|--------|
 | Fase 1 — Estrutura | 10/10 |
-| Fase 2 — AsyncStorage | 13/15 |
+| Fase 2 — AsyncStorage | 14/15 |
 | Fase 3 — SQLite | 2/30 |
 
 Checklist item a item em [NOTA.md](NOTA.md) · [ver a rodada mais recente no Actions](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml)

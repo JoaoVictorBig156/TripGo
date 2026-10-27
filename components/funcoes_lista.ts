@@ -1,5 +1,6 @@
 import { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from "react-native";
 
 const CHAVE_LISTA = '@lista_de_itens';
 
@@ -97,12 +98,30 @@ export function useFuncoes() {
   };
 
 
-  async function excluirItem(idSelecionado: number) {
-    const exclusaoDeItem = viagens.filter((viagem) => viagem.id !== idSelecionado)
+ async function excluirItem(idSelecionado: number) {
+  Alert.alert(
+    'Confirmar exclusão',
+    'Tem certeza de que deseja excluir este item?',
+    [
+      {
+        text: 'Cancelar',
+        style: 'cancel',
+      },
+      {
+        text: 'Excluir',
+        style: 'destructive',
+        onPress: async () => {
+          const exclusaoDeItem = viagens.filter(
+            (viagem) => viagem.id !== idSelecionado
+          );
 
-    setViagens(exclusaoDeItem);
-    await salvarLista(exclusaoDeItem);
-  }
+          setViagens(exclusaoDeItem);
+          await salvarLista(exclusaoDeItem);
+        },
+      },
+    ]
+  );
+}
 
   return {
     local,
