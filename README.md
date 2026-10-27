@@ -5,7 +5,7 @@
 
 [![CI](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-R-orange)](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml)
 
-**R** — Regular · **45%** (25/55 pontos) · atualizado em 2026-10-27 00:17
+**R** — Regular · **45%** (25/55 pontos) · atualizado em 2026-10-27 00:26
 
 | Fase | Pontos |
 |------|--------|
