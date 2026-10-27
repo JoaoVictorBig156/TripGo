@@ -6,14 +6,14 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=R&color=orange)
 
-**Nota atual: R** · 45% (25/55 pontos) · rodada de 2026-10-27 00:36:52 · commit `1720a1e`
+**Nota atual: R** · 47% (26/55 pontos) · rodada de 2026-10-27 00:39:50 · commit `5801273`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
 | Fase | Pontos | Situação |
 |---|---|---|
 | Fase 1 — Estrutura | 10/10 | completa |
-| Fase 2 — AsyncStorage | 13/15 | em desenvolvimento |
+| Fase 2 — AsyncStorage | 14/15 | em desenvolvimento |
 | Fase 3 — SQLite | 2/30 | iniciando |
 
 ## Checklist validado
@@ -31,7 +31,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
 - [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `4 arquivos de tela`
 
-### Fase 2 — Persistência com AsyncStorage (13/15 pts)
+### Fase 2 — Persistência com AsyncStorage (14/15 pts)
 
 - [x] **(+1 pts)** Dependência async-storage está no package.json — `no package.json`
 - [x] **(+1 pts)** Existe import do AsyncStorage no código — `components/funcoes_lista.ts`
@@ -45,7 +45,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Formulário salva chamando adicionar/salvar — `app/Lista.tsx`
 - [x] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
 - [x] **(+1 pts)** Tela de detalhe usa busca/dados do storage — `app/Detalhe.tsx`
-- [ ] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `—`
+- [x] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
 - [ ] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
 
