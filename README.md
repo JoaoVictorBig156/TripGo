@@ -3,9 +3,9 @@
 <!-- PAM-CI-NOTA-INICIO -->
 ### Nota atual (automática) — TripGo (viagens)
 
-[![CI](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-R-orange)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
+[![CI](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-R-orange)](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml)
 
-**R** — Regular · **47%** (26/55 pontos) · atualizado em 2026-10-27 00:39
+**R** — Regular · **45%** (25/55 pontos) · atualizado em 2026-10-27 00:26
 
 | Fase | Pontos |
 |------|--------|
@@ -13,7 +13,7 @@
 | Fase 2 — AsyncStorage | 14/15 |
 | Fase 3 — SQLite | 2/30 |
 
-Checklist item a item em [NOTA.md](NOTA.md) · [ver a rodada mais recente no Actions](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
+Checklist item a item em [NOTA.md](NOTA.md) · [ver a rodada mais recente no Actions](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml)
 <!-- PAM-CI-NOTA-FIM -->
 
 **TripGo** — Trabalho em Grupo de PAM I
@@ -73,6 +73,11 @@ Projeto criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo
 > Material completo do curso: [PAM I](https://etec-bento-quirino.github.io/Programacao-Aplicativos-Moveis-I/)
 
 
+
+
+
+
+
 ---
 
 ## Colaboração por integrante
@@ -81,10 +86,8 @@ Projeto criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo
 
 | # | Integrante | Commits | Participação |
 |---|------------|---------|--------------|
-| 1 | pedrobillato | 12 | 31.6% ██████░░░░░░░░░░░░░░ |
-| 2 | JoaoVictorBig156 | 10 | 26.3% █████░░░░░░░░░░░░░░░ |
-| 3 | JaoViana327 | 8 | 21.1% ████░░░░░░░░░░░░░░░░ |
-| 4 | Pedro Billato | 6 | 15.8% ███░░░░░░░░░░░░░░░░░ |
-| 5 | João Victor Ramalho de Oliveira | 2 | 5.3% █░░░░░░░░░░░░░░░░░░░ |
+| 1 | Pedro Billato | 18 | 47.4% █████████░░░░░░░░░░░ |
+| 2 | João Victor Ramalho de Oliveira | 12 | 31.6% ██████░░░░░░░░░░░░░░ |
+| 3 | João Viana | 8 | 21.1% ████░░░░░░░░░░░░░░░░ |
 
 **Total de commits considerados:** 38
