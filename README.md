@@ -3,9 +3,9 @@
 <!-- PAM-CI-NOTA-INICIO -->
 ### Nota atual (automática) — TripGo (viagens)
 
-[![CI](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-R-orange)](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml)
+[![CI](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-R-orange)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 
-**R** — Regular · **45%** (25/55 pontos) · atualizado em 2026-10-27 00:26
+**R** — Regular · **47%** (26/55 pontos) · atualizado em 2026-10-27 00:49
 
 | Fase | Pontos |
 |------|--------|
@@ -13,7 +13,7 @@
 | Fase 2 — AsyncStorage | 14/15 |
 | Fase 3 — SQLite | 2/30 |
 
-Checklist item a item em [NOTA.md](NOTA.md) · [ver a rodada mais recente no Actions](https://github.com/wendelmax/TripGo/actions/workflows/pam-ci.yml)
+Checklist item a item em [NOTA.md](NOTA.md) · [ver a rodada mais recente no Actions](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 <!-- PAM-CI-NOTA-FIM -->
 
 **TripGo** — Trabalho em Grupo de PAM I
