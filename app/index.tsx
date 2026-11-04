@@ -62,7 +62,7 @@ export default function Index() {
               onPress={() =>
                 router.push({
                   
-                  pathname: "/Detalhes",
+                  pathname: "/Detalhe",
                   params: {
                     id: viagem.id.toString(),
                   },
