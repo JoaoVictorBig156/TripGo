@@ -5,7 +5,7 @@
 
 [![CI](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-R-orange)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 
-**R** — Regular · **47%** (26/55 pontos) · atualizado em 2026-11-04 23:18
+**R** — Regular · **47%** (26/55 pontos) · atualizado em 2026-11-04 23:19
 
 | Fase | Pontos |
 |------|--------|
