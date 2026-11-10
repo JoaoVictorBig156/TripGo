@@ -1,6 +1,6 @@
 > Este arquivo e **gerado automaticamente** pelo CI a cada push na branch `main`.
 > Nao edite a mao: o proximo commit do CI sobrescreve. Para ver a rodada no Actions:
-> https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml
+> https://github.com/ORG/REPO/actions/workflows/pam-ci.yml
 
 ## Nota PAM I — TripGo (viagens)
 
