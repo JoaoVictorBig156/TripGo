@@ -2,10 +2,9 @@
 import * as SQLite from 'expo-sqlite';
 
 export async function criarTabelas(
-    db: SQLite.SQLiteDatabase
+  db: SQLite.SQLiteDatabase
 ): Promise<void> {
-
-    db.execSync(`
+  db.execSync(`
     PRAGMA foreign_keys = ON;
 
     CREATE TABLE IF NOT EXISTS viagens (
@@ -28,57 +27,58 @@ export async function criarTabelas(
     );
   `);
 
-    console.log('Tabelas criadas com sucesso!');
+  console.log('Tabelas criadas com sucesso!');
 }
-export function adicionarViagem(
-    db: SQLite.SQLiteDatabase,
-    local: string,
-    dataIda: string,
-    dataVolta: string
+
+export async function adicionarViagem(
+  db: SQLite.SQLiteDatabase,
+  local: string,
+  dataIda: string,
+  dataVolta: string
 ) {
-    return db.runSync(
-        `INSERT INTO viagens (local, data_ida, data_volta)
+  return await db.runAsync(
+    `INSERT INTO viagens (local, data_ida, data_volta)
      VALUES (?, ?, ?)`,
-        [local, dataIda, dataVolta]
-    );
+    [local, dataIda, dataVolta]
+  );
 }
 
 export function listarViagens(
-    db: SQLite.SQLiteDatabase
+  db: SQLite.SQLiteDatabase
 ) {
-    return db.getAllSync<{
-        id: number;
-        local: string;
-        data_ida: string;
-        data_volta: string;
-    }>(
-        'SELECT * FROM viagens ORDER BY id DESC'
-    );
+  return db.getAllSync<{
+    id: number;
+    local: string;
+    data_ida: string;
+    data_volta: string;
+  }>(
+    'SELECT * FROM viagens ORDER BY id DESC'
+  );
 }
 
 export function atualizarViagem(
-    db: SQLite.SQLiteDatabase,
-    id: number,
-    local: string,
-    dataIda: string,
-    dataVolta: string
+  db: SQLite.SQLiteDatabase,
+  id: number,
+  local: string,
+  dataIda: string,
+  dataVolta: string
 ) {
-    return db.runSync(
-        `UPDATE viagens
+  return db.runSync(
+    `UPDATE viagens
      SET local = ?, data_ida = ?, data_volta = ?
      WHERE id = ?`,
-        [local, dataIda, dataVolta, id]
-    );
+    [local, dataIda, dataVolta, id]
+  );
 }
 
 export function excluirViagem(
-    db: SQLite.SQLiteDatabase,
-    id: number
+  db: SQLite.SQLiteDatabase,
+  id: number
 ) {
-    return db.runSync(
-        'DELETE FROM viagens WHERE id = ?',
-        [id]
-    );
+  return db.runSync(
+    'DELETE FROM viagens WHERE id = ?',
+    [id]
+  );
 }
 
 export function listarViagensComTotal(
@@ -103,12 +103,8 @@ export function listarViagensComTotal(
     GROUP BY viagens.id
     ORDER BY viagens.id DESC
   `);
-
-  
 }
 
-
-// CADASTRAR um passeio
 export function adicionarPasseio(
   db: SQLite.SQLiteDatabase,
   idViagem: number,
@@ -119,13 +115,12 @@ export function adicionarPasseio(
 ) {
   return db.runSync(
     `INSERT INTO passeios
-    (id_viagem, titulo, descricao, data, valor)
-    VALUES (?, ?, ?, ?, ?)`,
+     (id_viagem, titulo, descricao, data, valor)
+     VALUES (?, ?, ?, ?, ?)`,
     [idViagem, titulo, descricao, data, valor]
   );
 }
 
-// LISTAR passeios de uma viagem
 export function listarPasseios(
   db: SQLite.SQLiteDatabase,
   idViagem: number
@@ -138,12 +133,13 @@ export function listarPasseios(
     data: string | null;
     valor: number;
   }>(
-    'SELECT * FROM passeios WHERE id_viagem = ? ORDER BY id DESC',
+    `SELECT * FROM passeios
+     WHERE id_viagem = ?
+     ORDER BY id DESC`,
     [idViagem]
   );
 }
 
-// ATUALIZAR um passeio
 export function atualizarPasseio(
   db: SQLite.SQLiteDatabase,
   id: number,
@@ -160,7 +156,6 @@ export function atualizarPasseio(
   );
 }
 
-// EXCLUIR um passeio
 export function excluirPasseio(
   db: SQLite.SQLiteDatabase,
   id: number
@@ -171,7 +166,6 @@ export function excluirPasseio(
   );
 }
 
-// CALCULAR o total dos passeios
 export function calcularTotal(
   db: SQLite.SQLiteDatabase,
   idViagem: number
@@ -179,7 +173,9 @@ export function calcularTotal(
   const resultado = db.getFirstSync<{
     valor_total: number | null;
   }>(
-    'SELECT SUM(valor) AS valor_total FROM passeios WHERE id_viagem = ?',
+    `SELECT SUM(valor) AS valor_total
+     FROM passeios
+     WHERE id_viagem = ?`,
     [idViagem]
   );
 
