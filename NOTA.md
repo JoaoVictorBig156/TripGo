@@ -4,21 +4,21 @@
 
 ## Nota PAM I — TripGo (viagens)
 
-![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=R&color=orange)
+![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: R** · 47% (26/55 pontos) · rodada de 2026-11-04 23:21:25 · commit `8cad101`
+**Nota atual: MB** · 78% (43/55 pontos) · rodada de 2026-11-14 17:54:55 · commit `422648f`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
 | Fase | Pontos | Situação |
 |---|---|---|
-| Fase 1 — Estrutura | 10/10 | completa |
+| Fase 1 — Estrutura | 9/10 | em desenvolvimento |
 | Fase 2 — AsyncStorage | 14/15 | em desenvolvimento |
-| Fase 3 — SQLite | 2/30 | iniciando |
+| Fase 3 — SQLite | 20/30 | em desenvolvimento |
 
 ## Checklist validado
 
-### Fase 1 — Estrutura do projeto (10/10 pts)
+### Fase 1 — Estrutura do projeto (9/10 pts)
 
 - [x] **(+1 pts)** README.md existe e fala do projeto/grupo — `README.md`
 - [x] **(+1 pts)** Arquivo principal do app existe (app/index.tsx) — `app/index.tsx`
@@ -27,7 +27,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Existe tela de FORMULÁRIO — `app/Lista.tsx`
 - [x] **(+1 pts)** Existe tela de DETALHE — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `todos os imports resolvem`
+- [ ] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `expo-sqlite`
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
 - [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `4 arquivos de tela`
 
@@ -38,7 +38,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Storage faz leitura com AsyncStorage.getItem — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Storage grava com AsyncStorage.setItem — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `components/funcoes_lista.ts`
+- [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `components/banco.tsx`
 - [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Detalhe.tsx`
 - [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/Lista.tsx`
 - [x] **(+1 pts)** Formulário lê entradas com TextInput — `app/Lista.tsx`
@@ -49,23 +49,23 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
 - [ ] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
 
-### Fase 3 — Banco de dados SQLite (2/30 pts)
+### Fase 3 — Banco de dados SQLite (20/30 pts)
 
 - [ ] **(+2x2 pts)** Dependência expo-sqlite está no package.json — `FALTA instalar: npx expo install expo-sqlite`
-- [ ] **(+2x2 pts)** Existe import do expo-sqlite — `—`
-- [ ] **(+2x2 pts)** Existe arquivo de banco de dados — `—`
-- [ ] **(+2x2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `—`
-- [ ] **(+2x2 pts)** Insere dados com INSERT INTO — `—`
-- [ ] **(+2x2 pts)** Consulta com SELECT — `—`
-- [ ] **(+2x2 pts)** Atualiza com UPDATE — `—`
-- [ ] **(+2x2 pts)** Exclui com DELETE FROM — `—`
-- [ ] **(+2x2 pts)** Usa filtros com WHERE — `—`
+- [x] **(+2x2 pts)** Existe import do expo-sqlite — `components/banco.tsx`
+- [x] **(+2x2 pts)** Existe arquivo de banco de dados — `components/banco.tsx`
+- [x] **(+2x2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
+- [x] **(+2x2 pts)** Insere dados com INSERT INTO — `components/banco.tsx`
+- [x] **(+2x2 pts)** Consulta com SELECT — `components/banco.tsx`
+- [x] **(+2x2 pts)** Atualiza com UPDATE — `components/banco.tsx`
+- [x] **(+2x2 pts)** Exclui com DELETE FROM — `components/banco.tsx`
+- [x] **(+2x2 pts)** Usa filtros com WHERE — `components/banco.tsx`
 - [ ] **(+2x2 pts)** Banco aberto com openDatabaseAsync/openDatabase — `—`
 - [ ] **(+2x2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
 - [ ] **(+2x2 pts)** Formulário salva no banco (INSERT/runAsync) — `app/Lista.tsx`
 - [ ] **(+2x2 pts)** Detalhe busca no banco com WHERE/SELECT — `app/Detalhe.tsx`
 - [x] **(+2x2 pts)** Usa async/await corretamente (mais de 2 await) — `components/funcoes_lista.ts`
-- [ ] **(+2x2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `—`
+- [x] **(+2x2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
 
 ## Para evoluir a nota
 
