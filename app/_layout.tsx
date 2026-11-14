@@ -1,14 +1,11 @@
-import { SQLiteProvider } from 'expo-sqlite';
+
 import { Stack } from 'expo-router';
-import { criarTabelas } from '../components/banco';
+import { DatabaseProvider } from '../components/DatabaseProvider';
 
 export default function Layout() {
   return (
-    <SQLiteProvider
-      databaseName="tripgo.db"
-      onInit={criarTabelas}
-    >
+    <DatabaseProvider>
       <Stack />
-    </SQLiteProvider>
+    </DatabaseProvider>
   );
 }
