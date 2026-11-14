@@ -6,28 +6,28 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: MB** · 85% (47/55 pontos) · rodada de 2026-11-14 17:59:32 · commit `0391cdc`
+**Nota atual: MB** · 91% (50/55 pontos) · rodada de 2026-11-14 18:19:16 · commit `6ef8e1d`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
 | Fase | Pontos | Situação |
 |---|---|---|
-| Fase 1 — Estrutura | 9/10 | em desenvolvimento |
+| Fase 1 — Estrutura | 10/10 | completa |
 | Fase 2 — AsyncStorage | 14/15 | em desenvolvimento |
-| Fase 3 — SQLite | 24/30 | em desenvolvimento |
+| Fase 3 — SQLite | 26/30 | em desenvolvimento |
 
 ## Checklist validado
 
-### Fase 1 — Estrutura do projeto (9/10 pts)
+### Fase 1 — Estrutura do projeto (10/10 pts)
 
 - [x] **(+1 pts)** README.md existe e fala do projeto/grupo — `README.md`
 - [x] **(+1 pts)** Arquivo principal do app existe (app/index.tsx) — `app/index.tsx`
-- [x] **(+1 pts)** package.json existe com a dependência "expo" — `expo ^58.0.0`
+- [x] **(+1 pts)** package.json existe com a dependência "expo" — `expo ~58.0.25`
 - [x] **(+1 pts)** Existe tela de LISTAGEM — `app/Lista.tsx`
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Existe tela de FORMULÁRIO — `app/Lista.tsx`
 - [x] **(+1 pts)** Existe tela de DETALHE — `app/Detalhe.tsx`
-- [ ] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `expo-sqlite`
+- [x] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `todos os imports resolvem`
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
 - [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `4 arquivos de tela`
 
@@ -49,9 +49,9 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
 
-### Fase 3 — Banco de dados SQLite (24/30 pts)
+### Fase 3 — Banco de dados SQLite (26/30 pts)
 
-- [ ] **(+2x2 pts)** Dependência expo-sqlite está no package.json — `FALTA instalar: npx expo install expo-sqlite`
+- [x] **(+2x2 pts)** Dependência expo-sqlite está no package.json — `no package.json`
 - [x] **(+2x2 pts)** Existe import do expo-sqlite — `app/Lista.tsx`
 - [x] **(+2x2 pts)** Existe arquivo de banco de dados — `components/banco.tsx`
 - [x] **(+2x2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
