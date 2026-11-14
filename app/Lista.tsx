@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 
 import {
@@ -10,12 +11,12 @@ import {
 } from "react-native";
 
 import { router } from "expo-router";
-import { useSQLiteContext } from "expo-sqlite";
+import { useBanco } from '../components/DatabaseProvider';
 
 import { adicionarViagem } from "../components/banco";
 
 export default function Lista() {
-  const db = useSQLiteContext();
+  const db = useBanco();
 
   const [local, setLocal] = useState("");
   const [dataDeIda, setDataIda] = useState("");
