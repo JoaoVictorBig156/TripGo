@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: MB** · 78% (43/55 pontos) · rodada de 2026-11-14 17:57:16 · commit `df52537`
+**Nota atual: MB** · 85% (47/55 pontos) · rodada de 2026-11-14 17:59:32 · commit `0391cdc`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -14,7 +14,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 |---|---|---|
 | Fase 1 — Estrutura | 9/10 | em desenvolvimento |
 | Fase 2 — AsyncStorage | 14/15 | em desenvolvimento |
-| Fase 3 — SQLite | 20/30 | em desenvolvimento |
+| Fase 3 — SQLite | 24/30 | em desenvolvimento |
 
 ## Checklist validado
 
@@ -38,21 +38,21 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Storage faz leitura com AsyncStorage.getItem — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Storage grava com AsyncStorage.setItem — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `components/banco.tsx`
+- [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `app/Lista.tsx`
 - [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/Lista.tsx`
+- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `components/banco.tsx`
 - [x] **(+1 pts)** Formulário lê entradas com TextInput — `app/Lista.tsx`
 - [x] **(+1 pts)** Formulário salva chamando adicionar/salvar — `app/Lista.tsx`
-- [x] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
+- [ ] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
 - [x] **(+1 pts)** Tela de detalhe usa busca/dados do storage — `app/Detalhe.tsx`
 - [x] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
-- [ ] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
+- [x] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
 
-### Fase 3 — Banco de dados SQLite (20/30 pts)
+### Fase 3 — Banco de dados SQLite (24/30 pts)
 
 - [ ] **(+2x2 pts)** Dependência expo-sqlite está no package.json — `FALTA instalar: npx expo install expo-sqlite`
-- [x] **(+2x2 pts)** Existe import do expo-sqlite — `app/_layout.tsx`
+- [x] **(+2x2 pts)** Existe import do expo-sqlite — `app/Lista.tsx`
 - [x] **(+2x2 pts)** Existe arquivo de banco de dados — `components/banco.tsx`
 - [x] **(+2x2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
 - [x] **(+2x2 pts)** Insere dados com INSERT INTO — `components/banco.tsx`
@@ -61,8 +61,8 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+2x2 pts)** Exclui com DELETE FROM — `components/banco.tsx`
 - [x] **(+2x2 pts)** Usa filtros com WHERE — `components/banco.tsx`
 - [ ] **(+2x2 pts)** Banco aberto com openDatabaseAsync/openDatabase — `—`
-- [ ] **(+2x2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
-- [ ] **(+2x2 pts)** Formulário salva no banco (INSERT/runAsync) — `app/Lista.tsx`
+- [x] **(+2x2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
+- [x] **(+2x2 pts)** Formulário salva no banco (INSERT/runAsync) — `app/Lista.tsx`
 - [ ] **(+2x2 pts)** Detalhe busca no banco com WHERE/SELECT — `app/Detalhe.tsx`
 - [x] **(+2x2 pts)** Usa async/await corretamente (mais de 2 await) — `components/funcoes_lista.ts`
 - [x] **(+2x2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`

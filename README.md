@@ -5,13 +5,13 @@
 
 [![CI](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-MB-green)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 
-**MB** — Muito bom · **78%** (43/55 pontos) · atualizado em 2026-11-14 17:57
+**MB** — Muito bom · **85%** (47/55 pontos) · atualizado em 2026-11-14 17:59
 
 | Fase | Pontos |
 |------|--------|
 | Fase 1 — Estrutura | 9/10 |
 | Fase 2 — AsyncStorage | 14/15 |
-| Fase 3 — SQLite | 20/30 |
+| Fase 3 — SQLite | 24/30 |
 
 Checklist item a item em [NOTA.md](NOTA.md) · [ver a rodada mais recente no Actions](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 <!-- PAM-CI-NOTA-FIM -->
