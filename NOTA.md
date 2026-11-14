@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: MB** · 95% (52/55 pontos) · rodada de 2026-11-14 18:25:22 · commit `3c4d6dd`
+**Nota atual: MB** · 91% (50/55 pontos) · rodada de 2026-11-14 18:37:48 · commit `1242dfb`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -14,7 +14,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 |---|---|---|
 | Fase 1 — Estrutura | 10/10 | completa |
 | Fase 2 — AsyncStorage | 14/15 | em desenvolvimento |
-| Fase 3 — SQLite | 28/30 | em desenvolvimento |
+| Fase 3 — SQLite | 26/30 | em desenvolvimento |
 
 ## Checklist validado
 
@@ -49,10 +49,10 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
 
-### Fase 3 — Banco de dados SQLite (28/30 pts)
+### Fase 3 — Banco de dados SQLite (26/30 pts)
 
 - [x] **(+2x2 pts)** Dependência expo-sqlite está no package.json — `no package.json`
-- [x] **(+2x2 pts)** Existe import do expo-sqlite — `app/Lista.tsx`
+- [x] **(+2x2 pts)** Existe import do expo-sqlite — `components/DatabaseProvider.tsx`
 - [x] **(+2x2 pts)** Existe arquivo de banco de dados — `components/DatabaseProvider.tsx`
 - [x] **(+2x2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
 - [x] **(+2x2 pts)** Insere dados com INSERT INTO — `components/banco.tsx`
@@ -62,7 +62,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+2x2 pts)** Usa filtros com WHERE — `components/banco.tsx`
 - [x] **(+2x2 pts)** Banco aberto com openDatabaseAsync/openDatabase — `components/DatabaseProvider.tsx`
 - [x] **(+2x2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
-- [x] **(+2x2 pts)** Formulário salva no banco (INSERT/runAsync) — `app/Lista.tsx`
+- [ ] **(+2x2 pts)** Formulário salva no banco (INSERT/runAsync) — `app/Lista.tsx`
 - [ ] **(+2x2 pts)** Detalhe busca no banco com WHERE/SELECT — `app/Detalhe.tsx`
 - [x] **(+2x2 pts)** Usa async/await corretamente (mais de 2 await) — `components/DatabaseProvider.tsx`
 - [x] **(+2x2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
