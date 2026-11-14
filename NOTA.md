@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: MB** · 78% (43/55 pontos) · rodada de 2026-11-14 17:54:55 · commit `422648f`
+**Nota atual: MB** · 78% (43/55 pontos) · rodada de 2026-11-14 17:57:16 · commit `df52537`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -52,7 +52,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 ### Fase 3 — Banco de dados SQLite (20/30 pts)
 
 - [ ] **(+2x2 pts)** Dependência expo-sqlite está no package.json — `FALTA instalar: npx expo install expo-sqlite`
-- [x] **(+2x2 pts)** Existe import do expo-sqlite — `components/banco.tsx`
+- [x] **(+2x2 pts)** Existe import do expo-sqlite — `app/_layout.tsx`
 - [x] **(+2x2 pts)** Existe arquivo de banco de dados — `components/banco.tsx`
 - [x] **(+2x2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
 - [x] **(+2x2 pts)** Insere dados com INSERT INTO — `components/banco.tsx`
