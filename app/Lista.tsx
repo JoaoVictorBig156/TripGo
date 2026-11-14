@@ -11,8 +11,7 @@ import {
 } from "react-native";
 
 import { router } from "expo-router";
-import { useBanco } from '../components/DatabaseProvider';
-
+import { useBanco } from "../components/DatabaseProvider";
 import { adicionarViagem } from "../components/banco";
 
 export default function Lista() {
@@ -21,9 +20,9 @@ export default function Lista() {
   const [local, setLocal] = useState("");
   const [dataDeIda, setDataIda] = useState("");
   const [dataDeVolta, setDataVolta] = useState("");
+  const [salvando, setSalvando] = useState(false);
 
-  // Cadastrar uma viagem
-  function adicionarItem() {
+  async function adicionarItem() {
     if (
       local.trim() === "" ||
       dataDeIda.trim() === "" ||
@@ -33,27 +32,36 @@ export default function Lista() {
       return;
     }
 
-    adicionarViagem(
-      db,
-      local.trim(),
-      dataDeIda.trim(),
-      dataDeVolta.trim()
-    );
+    if (salvando) return;
 
-    Alert.alert("Sucesso", "Viagem cadastrada!");
+    try {
+      setSalvando(true);
 
-    setLocal("");
-    setDataIda("");
-    setDataVolta("");
+      await adicionarViagem(
+        db,
+        local.trim(),
+        dataDeIda.trim(),
+        dataDeVolta.trim()
+      );
 
-    router.back();
+      Alert.alert("Sucesso", "Viagem cadastrada!");
+
+      setLocal("");
+      setDataIda("");
+      setDataVolta("");
+
+      router.back();
+    } catch (error) {
+      console.error("Erro ao cadastrar viagem:", error);
+      Alert.alert("Erro", "Não foi possível cadastrar a viagem.");
+    } finally {
+      setSalvando(false);
+    }
   }
 
   return (
     <View style={styles.container}>
-
       <View style={styles.caixasDePerguntas}>
-
         <Text style={styles.titulo}>
           Nova viagem
         </Text>
@@ -78,28 +86,27 @@ export default function Lista() {
           onChangeText={setDataVolta}
           placeholder="Data de volta (DD/MM/AAAA)"
         />
-
       </View>
 
       <View style={styles.posicaoBotao}>
-
         <Pressable
-          style={styles.botao}
+          style={[
+            styles.botao,
+            salvando && styles.botaoDesativado,
+          ]}
           onPress={adicionarItem}
+          disabled={salvando}
         >
           <Text style={styles.detalhes}>
-            Adicionar viagem
+            {salvando ? "Salvando..." : "Adicionar viagem"}
           </Text>
         </Pressable>
-
       </View>
-
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     justifyContent: "center",
@@ -140,9 +147,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
+  botaoDesativado: {
+    opacity: 0.6,
+  },
+
   detalhes: {
     color: "white",
     fontSize: 18,
   },
-
 });
