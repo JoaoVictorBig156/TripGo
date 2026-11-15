@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: MB** · 91% (50/55 pontos) · rodada de 2026-11-14 18:43:59 · commit `2fb12bb`
+**Nota atual: MB** · 91% (50/55 pontos) · rodada de 2026-11-15 02:55:10 · commit `a2f71b3`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -40,12 +40,12 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Detalhe.tsx`
 - [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `app/Lista.tsx`
 - [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `components/banco.tsx`
+- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/index.tsx`
 - [x] **(+1 pts)** Formulário lê entradas com TextInput — `app/Lista.tsx`
 - [x] **(+1 pts)** Formulário salva chamando adicionar/salvar — `app/Lista.tsx`
 - [ ] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
 - [x] **(+1 pts)** Tela de detalhe usa busca/dados do storage — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `components/funcoes_lista.ts`
+- [x] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `app/index.tsx`
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
 
