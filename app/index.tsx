@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback } from "react";
 
 import {
@@ -6,33 +7,80 @@ import {
   StyleSheet,
   Pressable,
   Image,
+  Alert,
 } from "react-native";
 
 import {
   router,
   useFocusEffect,
 } from "expo-router";
+import { useBanco } from '../components/DatabaseProvider';
 
 import {
-  useFuncoes,
-  Viagem,
-} from "../components/funcoes_lista";
+  listarViagensComTotal,
+  excluirViagem,
+} from "../components/banco";
+
+type Viagem = {
+  id: number;
+  local: string;
+  data_ida: string;
+  data_volta: string;
+  valor_total: number;
+};
 
 export default function Index() {
-  const { carregarLista } = useFuncoes();
+  const db = useBanco();
 
   const [viagens, setViagens] = useState<Viagem[]>([]);
 
+  // Carregar viagens do banco
+  const carregarViagens = useCallback(() => {
+    const dados = listarViagensComTotal(db);
+    setViagens(dados);
+  }, [db]);
+
   useFocusEffect(
     useCallback(() => {
-      const inicializar = async () => {
-        const dadosRecuperados = await carregarLista();
-        setViagens(dadosRecuperados);
-      };
-
-      inicializar();
-    }, [])
+      carregarViagens();
+    }, [carregarViagens])
   );
+
+  // Excluir viagem
+  function removerViagem(id: number, local: string) {
+    Alert.alert(
+      "Excluir viagem",
+      `Deseja realmente excluir a viagem para ${local}? Os passeios relacionados também serão excluídos.`,
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Excluir",
+          style: "destructive",
+          onPress: () => {
+            try {
+              excluirViagem(db, id);
+
+              carregarViagens();
+
+              Alert.alert(
+                "Sucesso",
+                "Viagem excluída com sucesso!"
+              );
+            } catch (error) {
+              Alert.alert(
+                "Erro",
+                "Não foi possível excluir a viagem."
+              );
+              console.error(error);
+            }
+          },
+        },
+      ]
+    );
+  }
 
   return (
     <View style={styles.container}>
@@ -56,21 +104,21 @@ export default function Index() {
 
           viagens.map((viagem) => (
 
-            <Pressable
+            <View
               key={viagem.id}
               style={styles.viagemCadastrada}
-              onPress={() =>
-                router.push({
-                  
-                  pathname: "/Detalhe",
-                  params: {
-                    id: viagem.id.toString(),
-                  },
-                })
-              }
             >
 
-              <View>
+              <Pressable
+                onPress={() =>
+                  router.push({
+                    pathname: "/Passeios",
+                    params: {
+                      id: viagem.id.toString(),
+                    },
+                  })
+                }
+              >
 
                 <Text
                   style={[
@@ -82,39 +130,42 @@ export default function Index() {
                 </Text>
 
                 <Text style={styles.detalhe}>
-                  {viagem.dataDeIda} - {viagem.dataDeVolta}
+                  Ida: {viagem.data_ida}
+                </Text>
+
+                <Text style={styles.detalhe}>
+                  Volta: {viagem.data_volta}
                 </Text>
 
                 <View style={styles.linha} />
 
-                <Text style={styles.detalhe}>
-                  <Text style={styles.negrito}>
-                    Hotel:
-                  </Text>{" "}
-                  {viagem.nomeHotel}
-                </Text>
+                <View style={styles.posicaoValor}>
+                  <Text style={styles.valor}>
+                    <Text style={styles.negrito}>
+                      Total dos passeios:
+                    </Text>{" "}
+                    R$ {viagem.valor_total.toFixed(2)}
+                  </Text>
+                </View>
 
-                <Text style={styles.detalhe}>
-                  <Text style={styles.negrito}>
-                    Transporte:
-                  </Text>{" "}
-                  {viagem.nomeTransporte}
-                </Text>
+              </Pressable>
+
+              <View style={styles.acoes}>
+
+                <Pressable
+                  style={styles.botaoExcluir}
+                  onPress={() =>
+                    removerViagem(viagem.id, viagem.local)
+                  }
+                >
+                  <Text style={styles.textoExcluir}>
+                    Excluir viagem
+                  </Text>
+                </Pressable>
 
               </View>
 
-              <View style={styles.posicaoValor}>
-
-                <Text style={styles.valor}>
-                  <Text style={styles.negrito}>
-                    Valor Total:
-                  </Text>{" "}
-                  R$ {viagem.valor.toFixed(2)}
-                </Text>
-
-              </View>
-
-            </Pressable>
+            </View>
 
           ))
 
@@ -128,11 +179,9 @@ export default function Index() {
           style={styles.estiloBotao}
           onPress={() => router.push("/Lista")}
         >
-
           <Text style={styles.botaoTextoAdicionar}>
             Adicionar
           </Text>
-
         </Pressable>
 
       </View>
@@ -146,6 +195,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+      padding: 20,
+  transform: [{ translateY: -40 }],
   },
 
   imagem: {
@@ -153,6 +204,7 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 24,
     borderWidth: 0.8,
+    transform: [{ translateY: 40 }],
   },
 
   posicaoCadastros: {
@@ -172,9 +224,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     width: 300,
     margin: 5,
-    height: 180,
-    flexDirection: "column",
+    minHeight: 180,
     paddingTop: 10,
+    paddingBottom: 10,
   },
 
   localizacao: {
@@ -202,14 +254,32 @@ const styles = StyleSheet.create({
 
   posicaoValor: {
     alignItems: "flex-end",
-    height: 75,
-    justifyContent: "flex-end",
+    marginTop: 5,
   },
 
   valor: {
     color: "white",
-    fontSize: 20,
+    fontSize: 17,
     marginRight: 10,
+  },
+
+  acoes: {
+    alignItems: "flex-end",
+    marginHorizontal: 10,
+    marginTop: 10,
+  },
+
+  botaoExcluir: {
+    backgroundColor: "#A82020",
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderRadius: 8,
+  },
+
+  textoExcluir: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 14,
   },
 
   botao: {
