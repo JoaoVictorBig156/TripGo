@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=B&color=yellow)
 
-**Nota atual: B** · 66% (66/100 pontos) · rodada de 2026-11-17 01:27:38 · commit `53c8496`
+**Nota atual: B** · 66% (66/100 pontos) · rodada de 2026-11-17 01:28:13 · commit `f1c114a`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -63,7 +63,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 ### Fase 3 — Banco de dados SQLite (26/30 pts · peso 2x)
 
 - [x] **(+2 pts)** Dependência expo-sqlite está no package.json — `no package.json`
-- [x] **(+2 pts)** Existe import do expo-sqlite — `app/index.tsx`
+- [x] **(+2 pts)** Existe import do expo-sqlite — `components/DatabaseProvider.tsx`
 - [x] **(+2 pts)** Existe arquivo de banco de dados — `components/DatabaseProvider.tsx`
 - [x] **(+2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
 - [x] **(+2 pts)** Insere dados com INSERT INTO — `components/banco.tsx`
@@ -71,11 +71,11 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+2 pts)** Atualiza com UPDATE — `components/banco.tsx`
 - [x] **(+2 pts)** Exclui com DELETE FROM — `components/banco.tsx`
 - [x] **(+2 pts)** Usa filtros com WHERE — `components/banco.tsx`
-- [x] **(+2 pts)** Banco aberto com openDatabaseAsync/openDatabaseSync/openDatabase — `app/index.tsx`
+- [x] **(+2 pts)** Banco aberto com openDatabaseAsync/openDatabaseSync/openDatabase — `components/DatabaseProvider.tsx`
 - [x] **(+2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
 - [ ] **(+2 pts)** Formulário salva no banco (INSERT/runAsync/runSync) — `—`
 - [ ] **(+2 pts)** Detalhe busca no banco com WHERE/SELECT — `—`
-- [x] **(+2 pts)** Usa async/await corretamente (mais de 2 await) — `app/index.tsx`
+- [x] **(+2 pts)** Usa async/await corretamente (mais de 2 await) — `components/DatabaseProvider.tsx`
 - [x] **(+2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
 
 ### Fase 4 — Versão Final: SQLite Exclusivo, UX, Dispositivo e Entrega (21/45 pts · peso 3x)
