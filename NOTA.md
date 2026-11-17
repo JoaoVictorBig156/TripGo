@@ -6,19 +6,19 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: MB** · 91% (50/55 pontos) · rodada de 2026-11-17 00:30:04 · commit `4c8289c`
+**Nota atual: MB** · 87% (48/55 pontos) · rodada de 2026-11-17 00:46:39 · commit `1c4ddd6`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
 | Fase | Pontos | Situação |
 |---|---|---|
-| Fase 1 — Estrutura | 10/10 | completa |
-| Fase 2 — AsyncStorage | 14/15 | em desenvolvimento |
+| Fase 1 — Estrutura | 9/10 | em desenvolvimento |
+| Fase 2 — AsyncStorage | 13/15 | em desenvolvimento |
 | Fase 3 — SQLite | 26/30 | em desenvolvimento |
 
 ## Checklist validado
 
-### Fase 1 — Estrutura do projeto (10/10 pts)
+### Fase 1 — Estrutura do projeto (9/10 pts)
 
 - [x] **(+1 pts)** README.md existe e fala do projeto/grupo — `README.md`
 - [x] **(+1 pts)** Arquivo principal do app existe (app/index.tsx) — `app/index.tsx`
@@ -26,26 +26,26 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Existe tela de LISTAGEM — `app/Lista.tsx`
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Existe tela de FORMULÁRIO — `app/Lista.tsx`
-- [x] **(+1 pts)** Existe tela de DETALHE — `app/Detalhe.tsx`
+- [ ] **(+1 pts)** Existe tela de DETALHE — `app/Detalhe.tsx`
 - [x] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `todos os imports resolvem`
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
-- [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `4 arquivos de tela`
+- [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `3 arquivos de tela`
 
-### Fase 2 — Persistência com AsyncStorage (14/15 pts)
+### Fase 2 — Persistência com AsyncStorage (13/15 pts)
 
 - [x] **(+1 pts)** Dependência async-storage está no package.json — `no package.json`
 - [x] **(+1 pts)** Existe import do AsyncStorage no código — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Storage faz leitura com AsyncStorage.getItem — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Storage grava com AsyncStorage.setItem — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Detalhe.tsx`
+- [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Passeios.tsx`
 - [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `app/Lista.tsx`
-- [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `components/banco.tsx`
+- [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Passeios.tsx`
+- [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/Passeios.tsx`
 - [x] **(+1 pts)** Formulário lê entradas com TextInput — `app/Lista.tsx`
 - [x] **(+1 pts)** Formulário salva chamando adicionar/salvar — `app/Lista.tsx`
 - [ ] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
-- [x] **(+1 pts)** Tela de detalhe usa busca/dados do storage — `app/Detalhe.tsx`
-- [x] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `components/funcoes_lista.ts`
+- [ ] **(+1 pts)** Tela de detalhe usa busca/dados do storage — `app/Detalhe.tsx`
+- [x] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `app/Passeios.tsx`
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
 - [x] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
 
