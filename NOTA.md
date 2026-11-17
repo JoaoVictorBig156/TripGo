@@ -1,72 +1,101 @@
 > Este arquivo e **gerado automaticamente** pelo CI a cada push na branch `main`.
 > Nao edite a mao: o proximo commit do CI sobrescreve. Para ver a rodada no Actions:
-> https://github.com/ORG/REPO/actions/workflows/pam-ci.yml
+> https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml
 
 ## Nota PAM I — TripGo (viagens)
 
-![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
+![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=B&color=yellow)
 
-**Nota atual: MB** · 87% (48/55 pontos) · rodada de 2026-11-17 00:46:39 · commit `1c4ddd6`
+**Nota atual: B** · 66% (66/100 pontos) · rodada de 2026-11-17 00:47:04 · commit `95cedda`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
-| Fase | Pontos | Situação |
+| Fase | Peso | Pontos | Situação |
+|---|---|---|---|
+| Fase 1 — Estrutura | 1x (10 pts) | 8/10 | em desenvolvimento |
+| Fase 2 — AsyncStorage | 1x (15 pts) | 11/15 | em desenvolvimento |
+| Fase 3 — SQLite | 2x (30 pts) | 26/30 | em desenvolvimento |
+| Fase 4 — Versão Final (SQLite + UX + Dispositivo) | 3x (45 pts) | 21/45 | iniciando |
+
+## Resumo dos Testes Funcionais (Execução Real em Runtime Node + SQLite)
+
+| Teste Funcional SQLite (Fase 4) | Resultado | Detalhes da Execução |
 |---|---|---|
-| Fase 1 — Estrutura | 9/10 | em desenvolvimento |
-| Fase 2 — AsyncStorage | 13/15 | em desenvolvimento |
-| Fase 3 — SQLite | 26/30 | em desenvolvimento |
+| Schema / Inicialização (`CREATE TABLE`) | PENDENTE | Nenhuma tabela SQLite criada em runtime |
+| Adicionar (`INSERT INTO`) | PENDENTE | Não confirmou inserção no SQLite em runtime |
+| Listar + Filtrar (`SELECT` + `WHERE`) | PENDENTE | Não confirmou leitura/filtro no SQLite em runtime |
+| Editar (`UPDATE`) | PENDENTE | Não confirmou atualização no SQLite em runtime |
+| Excluir (`DELETE FROM`) | PENDENTE | Não confirmou exclusão no SQLite em runtime |
 
 ## Checklist validado
 
-### Fase 1 — Estrutura do projeto (9/10 pts)
+### Fase 1 — Estrutura do projeto (8/10 pts · peso 1x)
 
 - [x] **(+1 pts)** README.md existe e fala do projeto/grupo — `README.md`
 - [x] **(+1 pts)** Arquivo principal do app existe (app/index.tsx) — `app/index.tsx`
 - [x] **(+1 pts)** package.json existe com a dependência "expo" — `expo ~58.0.25`
 - [x] **(+1 pts)** Existe tela de LISTAGEM — `app/Lista.tsx`
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Existe tela de FORMULÁRIO — `app/Lista.tsx`
-- [ ] **(+1 pts)** Existe tela de DETALHE — `app/Detalhe.tsx`
+- [ ] **(+1 pts)** Existe tela de FORMULÁRIO — `—`
+- [ ] **(+1 pts)** Existe tela de DETALHE — `—`
 - [x] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `todos os imports resolvem`
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
-- [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `3 arquivos de tela`
+- [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `6 arquivos de tela`
 
-### Fase 2 — Persistência com AsyncStorage (13/15 pts)
+### Fase 2 — Persistência com AsyncStorage (11/15 pts · peso 1x)
 
-- [x] **(+1 pts)** Dependência async-storage está no package.json — `no package.json`
-- [x] **(+1 pts)** Existe import do AsyncStorage no código — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Storage faz leitura com AsyncStorage.getItem — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Storage grava com AsyncStorage.setItem — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load) — `app/Passeios.tsx`
-- [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR — `app/Lista.tsx`
-- [x] **(+1 pts)** Existe busca por id (buscar/find/getItem) — `app/Passeios.tsx`
+- [x] **(+1 pts)** Dependência async-storage está no package.json (ou migrado p/ expo-sqlite) — `no package.json`
+- [x] **(+1 pts)** Existe import do AsyncStorage (ou SQLite) no código — `components/funcoes_lista.ts`
+- [x] **(+1 pts)** Storage faz leitura (AsyncStorage.getItem ou SELECT) — `components/funcoes_lista.ts`
+- [x] **(+1 pts)** Storage grava dados (AsyncStorage.setItem ou INSERT) — `components/funcoes_lista.ts`
+- [x] **(+1 pts)** Existe função de CARREGAR a lista (carregar/load/listar/get) — `app/Passeios.tsx`
+- [x] **(+1 pts)** Existe função de ADICIONAR/CADASTRAR (adicionar/salvar/inserir/create) — `app/Lista.tsx`
+- [x] **(+1 pts)** Existe busca por id (buscar/find/getItem/getFirst) — `app/Passeios.tsx`
 - [x] **(+1 pts)** Existe função de EXCLUIR/remover — `app/Passeios.tsx`
-- [x] **(+1 pts)** Formulário lê entradas com TextInput — `app/Lista.tsx`
-- [x] **(+1 pts)** Formulário salva chamando adicionar/salvar — `app/Lista.tsx`
-- [ ] **(+1 pts)** Lista é alimentada a partir do storage — `app/Lista.tsx`
-- [ ] **(+1 pts)** Tela de detalhe usa busca/dados do storage — `app/Detalhe.tsx`
+- [ ] **(+1 pts)** Formulário lê entradas com TextInput — `—`
+- [ ] **(+1 pts)** Formulário salva chamando adicionar/salvar — `—`
+- [x] **(+1 pts)** Lista é alimentada a partir do storage/banco — `app/Lista.tsx`
+- [ ] **(+1 pts)** Tela de detalhe usa busca/dados do storage/banco — `—`
 - [x] **(+1 pts)** Exclusão usa confirmação (Alert.alert) — `app/Passeios.tsx`
 - [x] **(+1 pts)** Dados iniciais/seed são gravados na 1ª execução — `components/funcoes_lista.ts`
-- [x] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `app/Lista.tsx`
+- [ ] **(+1 pts)** Formulário valida campos (trim/length/vazio) — `—`
 
-### Fase 3 — Banco de dados SQLite (26/30 pts)
+### Fase 3 — Banco de dados SQLite (26/30 pts · peso 2x)
 
-- [x] **(+2x2 pts)** Dependência expo-sqlite está no package.json — `no package.json`
-- [x] **(+2x2 pts)** Existe import do expo-sqlite — `app/index.tsx`
-- [x] **(+2x2 pts)** Existe arquivo de banco de dados — `components/DatabaseProvider.tsx`
-- [x] **(+2x2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
-- [x] **(+2x2 pts)** Insere dados com INSERT INTO — `components/banco.tsx`
-- [x] **(+2x2 pts)** Consulta com SELECT — `components/banco.tsx`
-- [x] **(+2x2 pts)** Atualiza com UPDATE — `components/banco.tsx`
-- [x] **(+2x2 pts)** Exclui com DELETE FROM — `components/banco.tsx`
-- [x] **(+2x2 pts)** Usa filtros com WHERE — `components/banco.tsx`
-- [x] **(+2x2 pts)** Banco aberto com openDatabaseAsync/openDatabase — `app/index.tsx`
-- [x] **(+2x2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
-- [ ] **(+2x2 pts)** Formulário salva no banco (INSERT/runAsync) — `app/Lista.tsx`
-- [ ] **(+2x2 pts)** Detalhe busca no banco com WHERE/SELECT — `app/Detalhe.tsx`
-- [x] **(+2x2 pts)** Usa async/await corretamente (mais de 2 await) — `app/index.tsx`
-- [x] **(+2x2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
+- [x] **(+2 pts)** Dependência expo-sqlite está no package.json — `no package.json`
+- [x] **(+2 pts)** Existe import do expo-sqlite — `app/index.tsx`
+- [x] **(+2 pts)** Existe arquivo de banco de dados — `components/DatabaseProvider.tsx`
+- [x] **(+2 pts)** Cria a tabela com CREATE TABLE IF NOT EXISTS — `components/banco.tsx`
+- [x] **(+2 pts)** Insere dados com INSERT INTO — `components/banco.tsx`
+- [x] **(+2 pts)** Consulta com SELECT — `components/banco.tsx`
+- [x] **(+2 pts)** Atualiza com UPDATE — `components/banco.tsx`
+- [x] **(+2 pts)** Exclui com DELETE FROM — `components/banco.tsx`
+- [x] **(+2 pts)** Usa filtros com WHERE — `components/banco.tsx`
+- [x] **(+2 pts)** Banco aberto com openDatabaseAsync/openDatabaseSync/openDatabase — `app/index.tsx`
+- [x] **(+2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
+- [ ] **(+2 pts)** Formulário salva no banco (INSERT/runAsync/runSync) — `—`
+- [ ] **(+2 pts)** Detalhe busca no banco com WHERE/SELECT — `—`
+- [x] **(+2 pts)** Usa async/await corretamente (mais de 2 await) — `app/index.tsx`
+- [x] **(+2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
+
+### Fase 4 — Versão Final: SQLite Exclusivo, UX, Dispositivo e Entrega (21/45 pts · peso 3x)
+
+- [x] **(+3 pts)** SQLite exclusivo: fluxo das telas usa SQLite sem depender de AsyncStorage p/ dados críticos — `components/DatabaseProvider.tsx (telas sem AsyncStorage crítico)`
+- [ ] **(+3 pts)** [Teste Funcional SQLite] Banco abre e cria a(s) tabela(s) em memória (CREATE TABLE) — `FALTA criar tabela real no SQLite em execução`
+- [ ] **(+3 pts)** [Teste Funcional SQLite] Fluxo de ADICIONAR insere registro real no banco (INSERT INTO) — `FALTA função de adicionar gravando registro real no SQLite`
+- [ ] **(+3 pts)** [Teste Funcional SQLite] Fluxo de LISTAR e FILTRAR retorna dados reais (SELECT + WHERE) — `FALTA consulta SELECT/WHERE funcional no SQLite`
+- [ ] **(+3 pts)** [Teste Funcional SQLite] Fluxo de EDITAR atualiza registro existente no banco (UPDATE) — `FALTA função de editar (UPDATE) alterando registro real no SQLite`
+- [ ] **(+3 pts)** [Teste Funcional SQLite] Fluxo de EXCLUIR remove registro do banco (DELETE FROM) — `FALTA função de excluir (DELETE FROM) removendo registro real no SQLite`
+- [ ] **(+3 pts)** Recurso do dispositivo: pacote nativo no package.json (notifications, image-picker, location) ou justificativa — `FALTA instalar expo-notifications / expo-image-picker / expo-location (ou justificar no README)`
+- [ ] **(+3 pts)** Recurso do dispositivo: uso da API nativa no código (notificação, foto ou GPS) ou justificativa — `FALTA integrar recurso do aparelho no código (Aulas 08, 09 ou 10)`
+- [x] **(+3 pts)** UX: Loading ao carregar a lista do SQLite (ActivityIndicator + estado loading/carregando) — `app/Passeios.tsx (app/Passeios.tsx)`
+- [x] **(+3 pts)** UX: Empty State quando não houver registros (mensagem amigável + ícone/emoji/ilustração) — `app/Passeios.tsx`
+- [x] **(+3 pts)** UX: Mensagem de erro amigável se falhar ao CARREGAR dados (try/catch com feedback) — `app/Lista.tsx`
+- [x] **(+3 pts)** UX: Mensagem de erro amigável e validação se falhar ao SALVAR/EXCLUIR (try/catch + Alert/.trim) — `app/Lista.tsx + validação .trim()`
+- [x] **(+3 pts)** Organização do código: separação em pastas por responsabilidade (screens/app, database/data, components) — `pastas: app, components`
+- [ ] **(+3 pts)** Interface consistente: FlatList (keyExtractor + renderItem) e estilização StyleSheet.create — `FALTA FlatList com keyExtractor/renderItem e StyleSheet.create consistente`
+- [x] **(+3 pts)** Entrega: repositório limpo (.gitignore sem node_modules) e README com instruções/Expo Go/APK — `README.md (60 linhas) + .gitignore`
 
 ## Para evoluir a nota
 
-Os itens **desmarcados** acima são exatamente o que falta no projeto. Cada rodada deste CI (a cada push) recalcula e atualiza a nota — o artefato `nota-pam` sempre mostra o valor mais recente.
+Os itens **desmarcados** acima são exatamente o que falta no projeto. Cada rodada deste CI (a cada push) executa os testes estáticos e funcionais, recalcula e atualiza a nota — o artefato `nota-pam` sempre mostra o valor mais recente.

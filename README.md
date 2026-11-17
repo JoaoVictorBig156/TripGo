@@ -3,15 +3,16 @@
 <!-- PAM-CI-NOTA-INICIO -->
 ### Nota atual (automática) — TripGo (viagens)
 
-[![CI](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-MB-green)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
+[![CI](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-B-yellow)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 
-**MB** — Muito bom · **87%** (48/55 pontos) · atualizado em 2026-11-17 00:46
+**B** — Bom · **66%** (66/100 pontos) · atualizado em 2026-11-17 00:47
 
 | Fase | Pontos |
 |------|--------|
-| Fase 1 — Estrutura | 9/10 |
-| Fase 2 — AsyncStorage | 13/15 |
+| Fase 1 — Estrutura | 8/10 |
+| Fase 2 — AsyncStorage | 11/15 |
 | Fase 3 — SQLite | 26/30 |
+| Fase 4 — Versão Final (UX e Dispositivo) | 21/45 |
 
 Checklist item a item em [NOTA.md](NOTA.md) · [ver a rodada mais recente no Actions](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 <!-- PAM-CI-NOTA-FIM -->
