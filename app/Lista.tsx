@@ -1,6 +1,6 @@
-
+ 
 import React, { useState } from "react";
-
+ 
 import {
   View,
   Text,
@@ -8,20 +8,22 @@ import {
   Pressable,
   StyleSheet,
   Alert,
+  ScrollView,
 } from "react-native";
-
+ 
 import { router } from "expo-router";
 import { useBanco } from "../components/DatabaseProvider";
 import { adicionarViagem } from "../components/banco";
-
+import { cores } from "../components/tema";
+ 
 export default function Lista() {
   const db = useBanco();
-
+ 
   const [local, setLocal] = useState("");
   const [dataDeIda, setDataIda] = useState("");
   const [dataDeVolta, setDataVolta] = useState("");
   const [salvando, setSalvando] = useState(false);
-
+ 
   async function adicionarItem() {
     if (
       local.trim() === "" ||
@@ -31,25 +33,25 @@ export default function Lista() {
       Alert.alert("Atenção", "Preencha todos os campos.");
       return;
     }
-
+ 
     if (salvando) return;
-
+ 
     try {
       setSalvando(true);
-
+ 
       await adicionarViagem(
         db,
         local.trim(),
         dataDeIda.trim(),
         dataDeVolta.trim()
       );
-
+ 
       Alert.alert("Sucesso", "Viagem cadastrada!");
-
+ 
       setLocal("");
       setDataIda("");
       setDataVolta("");
-
+ 
       router.back();
     } catch (error) {
       console.error("Erro ao cadastrar viagem:", error);
@@ -58,36 +60,48 @@ export default function Lista() {
       setSalvando(false);
     }
   }
-
+ 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={styles.conteudo}
+      keyboardShouldPersistTaps="handled"
+    >
       <View style={styles.caixasDePerguntas}>
-        <Text style={styles.titulo}>
-          Nova viagem
-        </Text>
-
-        <TextInput
-          style={styles.input}
-          value={local}
-          onChangeText={setLocal}
-          placeholder="Local de destino"
-        />
-
-        <TextInput
-          style={styles.input}
-          value={dataDeIda}
-          onChangeText={setDataIda}
-          placeholder="Data de ida (DD/MM/AAAA)"
-        />
-
-        <TextInput
-          style={styles.input}
-          value={dataDeVolta}
-          onChangeText={setDataVolta}
-          placeholder="Data de volta (DD/MM/AAAA)"
-        />
+        <View>
+          <Text style={styles.rotulo}>Local de destino</Text>
+          <TextInput
+            style={styles.input}
+            value={local}
+            onChangeText={setLocal}
+            placeholder="Ex.: Águas de São Pedro"
+            placeholderTextColor={cores.textoSuave}
+          />
+        </View>
+ 
+        <View>
+          <Text style={styles.rotulo}>Data de ida</Text>
+          <TextInput
+            style={styles.input}
+            value={dataDeIda}
+            onChangeText={setDataIda}
+            placeholder="DD/MM/AAAA"
+            placeholderTextColor={cores.textoSuave}
+          />
+        </View>
+ 
+        <View>
+          <Text style={styles.rotulo}>Data de volta</Text>
+          <TextInput
+            style={styles.input}
+            value={dataDeVolta}
+            onChangeText={setDataVolta}
+            placeholder="DD/MM/AAAA"
+            placeholderTextColor={cores.textoSuave}
+          />
+        </View>
       </View>
-
+ 
       <View style={styles.posicaoBotao}>
         <Pressable
           style={[
@@ -101,58 +115,87 @@ export default function Lista() {
             {salvando ? "Salvando..." : "Adicionar viagem"}
           </Text>
         </Pressable>
+ 
+        <Pressable
+          style={styles.botaoCancelar}
+          onPress={() => router.back()}
+        >
+          <Text style={styles.textoCancelar}>Cancelar</Text>
+        </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 }
-
+ 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    padding: 20,
+    backgroundColor: cores.fundo,
   },
-
+ 
+  conteudo: {
+    padding: 16,
+    paddingBottom: 40,
+  },
+ 
   caixasDePerguntas: {
-    gap: 15,
+    gap: 18,
   },
-
-  titulo: {
-    fontSize: 25,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 15,
+ 
+  rotulo: {
+    color: cores.textoSuave,
+    fontSize: 13,
+    marginBottom: 6,
   },
-
+ 
   input: {
-    backgroundColor: "white",
+    backgroundColor: cores.cartao,
     borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 10,
-    padding: 12,
-    fontSize: 16,
-  },
-
-  posicaoBotao: {
-    alignItems: "center",
-    marginTop: 25,
-  },
-
-  botao: {
-    height: 45,
-    width: 250,
-    backgroundColor: "#011A43",
+    borderColor: cores.borda,
     borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: cores.branco,
+  },
+ 
+  posicaoBotao: {
+    marginTop: 32,
+    gap: 12,
+  },
+ 
+  botao: {
+    height: 50,
+    backgroundColor: cores.destaque,
+    borderRadius: 25,
     alignItems: "center",
     justifyContent: "center",
   },
-
+ 
   botaoDesativado: {
     opacity: 0.6,
   },
-
+ 
   detalhes: {
-    color: "white",
-    fontSize: 18,
+    color: cores.branco,
+    fontSize: 16,
+    fontWeight: "700",
+  },
+ 
+  botaoCancelar: {
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 1.5,
+    borderColor: cores.destaque,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+ 
+  textoCancelar: {
+    color: cores.destaque,
+    fontSize: 16,
+    fontWeight: "700",
   },
 });
+ 
+ 
