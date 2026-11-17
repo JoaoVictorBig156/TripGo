@@ -72,12 +72,6 @@ Projeto criado com [`create-expo-app`](https://www.npmjs.com/package/create-expo
 > [!TIP]
 > Material completo do curso: [PAM I](https://etec-bento-quirino.github.io/Programacao-Aplicativos-Moveis-I/)
 
-
-
-
-
-
-
 ---
 
 ## Colaboração por integrante
