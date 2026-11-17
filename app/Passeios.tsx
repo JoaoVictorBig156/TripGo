@@ -11,8 +11,10 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter, useFocusEffect } from 'expo-router';
 import { useBanco } from '../components/DatabaseProvider';
+import { cores } from '../components/tema';
 
 import {
   listarViagens,
@@ -20,6 +22,7 @@ import {
   adicionarPasseio,
   atualizarPasseio,
   excluirPasseio,
+  excluirViagem,
   calcularTotal,
 } from '../components/banco';
 
@@ -202,6 +205,34 @@ export default function Passeios() {
     );
   }
 
+  // Excluir a viagem inteira (os passeios são apagados junto, ON DELETE CASCADE)
+
+  function removerViagem() {
+    Alert.alert(
+      'Excluir viagem',
+      'Deseja realmente excluir esta viagem? Os passeios também serão excluídos.',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: () => {
+            try {
+              excluirViagem(db, idViagem);
+              router.back();
+            } catch (error) {
+              console.error('Erro ao excluir viagem:', error);
+              Alert.alert('Erro', 'Não foi possível excluir a viagem.');
+            }
+          },
+        },
+      ]
+    );
+  }
+
   // Formatação de valores
 
   function formatarMoeda(valor: number) {
@@ -215,8 +246,8 @@ export default function Passeios() {
 
   if (carregando) {
     return (
-      <View style={styles.containerCarregando}>
-        <ActivityIndicator size="large" color="#0177ff" />
+      <View style={styles.containerCentro}>
+        <ActivityIndicator size="large" color={cores.destaque} />
         <Text style={styles.textoCarregando}>Carregando viagem...</Text>
       </View>
     );
@@ -226,14 +257,14 @@ export default function Passeios() {
 
   if (!viagem) {
     return (
-      <View style={styles.container}>
+      <View style={styles.containerCentro}>
         <Text style={styles.titulo}>Viagem não encontrada.</Text>
 
         <Pressable
-          style={styles.botaoVoltar}
+          style={styles.botaoContorno}
           onPress={() => router.back()}
         >
-          <Text style={styles.textoBotao}>Voltar</Text>
+          <Text style={styles.textoContorno}>Voltar</Text>
         </Pressable>
       </View>
     );
@@ -246,142 +277,116 @@ export default function Passeios() {
       style={styles.container}
       contentContainerStyle={styles.conteudo}
       showsVerticalScrollIndicator={false}
+      keyboardShouldPersistTaps="handled"
     >
-      {/* Cabeçalho */}
+      {/* Cabeçalho da viagem */}
 
-      <View style={styles.cabecalho}>
-        <Text style={styles.logo}>TRIPGO</Text>
+      <Text style={styles.titulo}>{viagem.local}</Text>
 
-        <Text style={styles.tituloViagem}>
-          {viagem.local}
-        </Text>
-
-        <Text style={styles.datas}>
-          {viagem.data_ida} até {viagem.data_volta}
-        </Text>
-
-        <Pressable
-          style={styles.botaoVoltar}
-          onPress={() => router.back()}
-        >
-          <Text style={styles.textoBotao}>Voltar às viagens</Text>
-        </Pressable>
+      <View style={styles.selo}>
+        <Text style={styles.seloTexto}>Minha viagem</Text>
       </View>
 
-      {/* Resumo */}
+      <View style={styles.caixa}>
+        <Text style={styles.rotulo}>Total dos passeios</Text>
+        <Text style={styles.valorGrande}>{formatarMoeda(total)}</Text>
+      </View>
 
-      <View style={styles.resumo}>
-        <View style={styles.resumoItem}>
-          <Text style={styles.resumoNumero}>
-            {passeios.length}
-          </Text>
-
-          <Text style={styles.resumoTexto}>
-            Passeios cadastrados
-          </Text>
+      <View style={styles.linhaDatas}>
+        <View style={[styles.caixa, styles.metade]}>
+          <Text style={styles.rotulo}>Data de ida</Text>
+          <Text style={styles.data}>{viagem.data_ida}</Text>
         </View>
 
-        <View style={styles.linhaVertical} />
-
-        <View style={styles.resumoItem}>
-          <Text style={styles.resumoNumero}>
-            {formatarMoeda(total)}
-          </Text>
-
-          <Text style={styles.resumoTexto}>
-            Total gasto
-          </Text>
+        <View style={[styles.caixa, styles.metade]}>
+          <Text style={styles.rotulo}>Data de volta</Text>
+          <Text style={styles.data}>{viagem.data_volta}</Text>
         </View>
       </View>
 
       {/* Lista de passeios */}
 
-      <View style={styles.secao}>
-        <Text style={styles.tituloSecao}>
-          Meus passeios
+      <View style={styles.cabecalhoSecao}>
+        <Text style={styles.tituloSecao}>Passeios</Text>
+
+        {!mostrarFormulario && (
+          <Pressable onPress={() => setMostrarFormulario(true)}>
+            <Text style={styles.adicionar}>+ Adicionar</Text>
+          </Pressable>
+        )}
+      </View>
+
+      {passeios.length === 0 ? (
+        <Text style={styles.vazio}>
+          Nenhum passeio cadastrado. Adicione seu primeiro passeio para
+          organizar sua viagem.
         </Text>
-
-        {passeios.length === 0 ? (
-          <View style={styles.vazio}>
-            <Text style={styles.vazioTitulo}>
-              Nenhum passeio cadastrado
-            </Text>
-
-            <Text style={styles.vazioTexto}>
-              Adicione seu primeiro passeio para organizar sua viagem.
-            </Text>
-          </View>
-        ) : (
-          passeios.map((passeio) => (
+      ) : (
+        <View style={styles.listaPasseios}>
+          {passeios.map((passeio, indice) => (
             <View style={styles.cardPasseio} key={passeio.id}>
-              <View style={styles.cardTopo}>
-                <Text style={styles.nomePasseio}>
-                  {passeio.titulo}
-                </Text>
+              <Pressable
+                style={styles.cardConteudo}
+                onPress={() => editarPasseio(passeio)}
+              >
+                <View style={styles.numero}>
+                  <Text style={styles.numeroTexto}>{indice + 1}</Text>
+                </View>
+
+                <View style={styles.cardTextos}>
+                  <Text style={styles.nomePasseio}>{passeio.titulo}</Text>
+
+                  {passeio.descricao ? (
+                    <Text style={styles.descricao}>{passeio.descricao}</Text>
+                  ) : null}
+
+                  {passeio.data ? (
+                    <Text style={styles.descricao}>Data: {passeio.data}</Text>
+                  ) : null}
+                </View>
 
                 <Text style={styles.valorPasseio}>
                   {formatarMoeda(passeio.valor)}
                 </Text>
-              </View>
+              </Pressable>
 
-              {passeio.descricao ? (
-                <Text style={styles.descricao}>
-                  {passeio.descricao}
-                </Text>
-              ) : null}
-
-              {passeio.data ? (
-                <Text style={styles.dataPasseio}>
-                  Data: {passeio.data}
-                </Text>
-              ) : null}
-
-              <View style={styles.acoes}>
-                <Pressable
-                  style={styles.botaoEditar}
-                  onPress={() => editarPasseio(passeio)}
-                >
-                  <Text style={styles.textoAcao}>
-                    Editar
-                  </Text>
-                </Pressable>
-
-                <Pressable
-                  style={styles.botaoExcluir}
-                  onPress={() => removerPasseio(passeio.id)}
-                >
-                  <Text style={styles.textoAcao}>
-                    Excluir
-                  </Text>
-                </Pressable>
-              </View>
+              <Pressable
+                hitSlop={10}
+                onPress={() => removerPasseio(passeio.id)}
+              >
+                <Ionicons name="close" size={22} color={cores.perigo} />
+              </Pressable>
             </View>
-          ))
-        )}
-      </View>
+          ))}
+
+          <Text style={styles.dica}>Toque em um passeio para editar.</Text>
+        </View>
+      )}
 
       {/* Formulário */}
 
       {mostrarFormulario && (
         <View style={styles.formulario}>
           <Text style={styles.tituloSecao}>
-            {idEdicao !== null ? 'Editar passeio' : 'Novo passeio'}
+            {idEdicao !== null ? 'Editar passeio' : 'Adicionar passeio'}
           </Text>
 
-          <Text style={styles.label}>Título do passeio</Text>
+          <Text style={styles.label}>Nome do passeio</Text>
 
           <TextInput
             style={styles.input}
-            placeholder="Ex: Visita ao museu"
+            placeholder="Ex.: Parque dos Sonhos"
+            placeholderTextColor={cores.textoSuave}
             value={titulo}
             onChangeText={setTitulo}
           />
 
-          <Text style={styles.label}>Descrição</Text>
+          <Text style={styles.label}>Observação (opcional)</Text>
 
           <TextInput
             style={[styles.input, styles.inputDescricao]}
-            placeholder="Descreva o passeio"
+            placeholder="Horário, dicas, o que levar..."
+            placeholderTextColor={cores.textoSuave}
             value={descricao}
             onChangeText={setDescricao}
             multiline
@@ -391,7 +396,8 @@ export default function Passeios() {
 
           <TextInput
             style={styles.input}
-            placeholder="Ex: 20/12/2026"
+            placeholder="Ex.: 20/12/2026"
+            placeholderTextColor={cores.textoSuave}
             value={data}
             onChangeText={setData}
           />
@@ -400,42 +406,36 @@ export default function Passeios() {
 
           <TextInput
             style={styles.input}
-            placeholder="Ex: 150,00"
+            placeholder="Ex.: 150,00"
+            placeholderTextColor={cores.textoSuave}
             value={valor}
             onChangeText={setValor}
             keyboardType="decimal-pad"
           />
 
           <Pressable
-            style={styles.botaoSalvar}
+            style={styles.botaoPrimario}
             onPress={salvarPasseio}
           >
-            <Text style={styles.textoBotao}>
-              {idEdicao !== null ? 'Salvar alterações' : 'Cadastrar passeio'}
+            <Text style={styles.textoPrimario}>
+              {idEdicao !== null ? 'Salvar alterações' : 'Salvar passeio'}
             </Text>
           </Pressable>
 
           <Pressable
-            style={styles.botaoCancelar}
+            style={styles.botaoContorno}
             onPress={limparFormulario}
           >
-            <Text style={styles.textoCancelar}>
-              Cancelar
-            </Text>
+            <Text style={styles.textoContorno}>Cancelar</Text>
           </Pressable>
         </View>
       )}
 
-      {/* Botão adicionar */}
+      {/* Excluir viagem */}
 
       {!mostrarFormulario && (
-        <Pressable
-          style={styles.botaoAdicionar}
-          onPress={() => setMostrarFormulario(true)}
-        >
-          <Text style={styles.textoBotao}>
-            + Adicionar passeio
-          </Text>
+        <Pressable style={styles.botaoPerigo} onPress={removerViagem}>
+          <Text style={styles.textoPerigo}>Excluir viagem</Text>
         </Pressable>
       )}
     </ScrollView>
@@ -447,274 +447,249 @@ export default function Passeios() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F3F6FA',
+    backgroundColor: cores.fundo,
   },
 
   conteudo: {
-    paddingBottom: 35,
+    padding: 16,
+    paddingBottom: 40,
   },
 
-  containerCarregando: {
+  containerCentro: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F3F6FA',
+    backgroundColor: cores.fundo,
+    gap: 16,
+    padding: 20,
   },
 
   textoCarregando: {
-    marginTop: 12,
     fontSize: 16,
-    color: '#011A43',
-  },
-
-  cabecalho: {
-    backgroundColor: '#011A43',
-    padding: 25,
-    paddingTop: 45,
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
-  },
-
-  logo: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
-    letterSpacing: 3,
-    marginBottom: 25,
+    color: cores.textoSuave,
   },
 
   titulo: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: '#011A43',
-    textAlign: 'center',
-    marginBottom: 15,
-  },
-
-  tituloViagem: {
-    color: '#FFFFFF',
+    color: cores.branco,
     fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 8,
+    fontWeight: '700',
   },
 
-  datas: {
-    color: '#D5E4FF',
-    fontSize: 14,
-  },
-
-  botaoVoltar: {
+  selo: {
     alignSelf: 'flex-start',
-    marginTop: 20,
-    backgroundColor: '#0177ff',
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: 10,
+    backgroundColor: cores.selo,
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    marginTop: 10,
+    marginBottom: 16,
   },
 
-  textoBotao: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-
-  resumo: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    margin: 18,
-    padding: 20,
-    borderRadius: 15,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    elevation: 3,
-  },
-
-  resumoItem: {
-    flex: 1,
-    alignItems: 'center',
-  },
-
-  resumoNumero: {
-    fontSize: 21,
-    fontWeight: 'bold',
-    color: '#0177ff',
-  },
-
-  resumoTexto: {
+  seloTexto: {
+    color: cores.branco,
     fontSize: 12,
-    color: '#667085',
-    marginTop: 6,
-    textAlign: 'center',
+    fontWeight: '700',
   },
 
-  linhaVertical: {
-    width: 1,
-    height: 45,
-    backgroundColor: '#E0E5ED',
-    marginHorizontal: 10,
+  caixa: {
+    backgroundColor: cores.cartao,
+    borderWidth: 1,
+    borderColor: cores.borda,
+    borderRadius: 14,
+    padding: 14,
   },
 
-  secao: {
-    paddingHorizontal: 18,
-    marginTop: 8,
-  },
-
-  tituloSecao: {
-    fontSize: 21,
-    fontWeight: 'bold',
-    color: '#011A43',
-    marginBottom: 15,
-  },
-
-  vazio: {
-    backgroundColor: '#FFFFFF',
-    padding: 25,
-    borderRadius: 15,
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-
-  vazioTitulo: {
-    fontSize: 17,
-    fontWeight: 'bold',
-    color: '#011A43',
-    marginBottom: 8,
-  },
-
-  vazioTexto: {
-    fontSize: 14,
-    color: '#667085',
-    textAlign: 'center',
-    lineHeight: 21,
-  },
-
-  cardPasseio: {
-    backgroundColor: '#FFFFFF',
-    padding: 18,
-    borderRadius: 15,
-    marginBottom: 14,
-    elevation: 2,
-  },
-
-  cardTopo: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 10,
-    gap: 10,
-  },
-
-  nomePasseio: {
-    flex: 1,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#011A43',
-  },
-
-  valorPasseio: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#0177ff',
-  },
-
-  descricao: {
-    fontSize: 14,
-    color: '#667085',
-    marginBottom: 8,
-    lineHeight: 20,
-  },
-
-  dataPasseio: {
+  rotulo: {
+    color: cores.textoSuave,
     fontSize: 13,
-    color: '#667085',
-    marginBottom: 12,
+    marginBottom: 6,
   },
 
-  acoes: {
+  valorGrande: {
+    color: cores.destaque,
+    fontSize: 28,
+    fontWeight: '700',
+  },
+
+  linhaDatas: {
     flexDirection: 'row',
-    gap: 10,
-    marginTop: 8,
-  },
-
-  botaoEditar: {
-    flex: 1,
-    backgroundColor: '#0177ff',
-    padding: 11,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-
-  botaoExcluir: {
-    flex: 1,
-    backgroundColor: '#D92D20',
-    padding: 11,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-
-  textoAcao: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    fontSize: 14,
-  },
-
-  formulario: {
-    backgroundColor: '#FFFFFF',
-    margin: 18,
-    padding: 20,
-    borderRadius: 15,
-    elevation: 2,
-  },
-
-  label: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: '#011A43',
-    marginBottom: 7,
+    gap: 12,
     marginTop: 12,
   },
 
-  input: {
-    backgroundColor: '#F3F6FA',
-    borderWidth: 1,
-    borderColor: '#DCE3ED',
-    borderRadius: 9,
-    padding: 13,
+  metade: {
+    flex: 1,
+  },
+
+  data: {
+    color: cores.branco,
+    fontSize: 18,
+    fontWeight: '700',
+  },
+
+  cabecalhoSecao: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 26,
+    marginBottom: 12,
+  },
+
+  tituloSecao: {
+    color: cores.destaque,
+    fontSize: 20,
+    fontWeight: '700',
+  },
+
+  adicionar: {
+    color: cores.destaque,
     fontSize: 15,
-    color: '#011A43',
+    fontWeight: '700',
+  },
+
+  vazio: {
+    color: cores.textoSuave,
+    fontSize: 15,
+    lineHeight: 22,
+  },
+
+  listaPasseios: {
+    gap: 10,
+  },
+
+  cardPasseio: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    backgroundColor: cores.cartao,
+    borderWidth: 1,
+    borderColor: cores.borda,
+    borderRadius: 14,
+    padding: 12,
+  },
+
+  cardConteudo: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+
+  numero: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: cores.selo,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  numeroTexto: {
+    color: cores.branco,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+
+  cardTextos: {
+    flex: 1,
+  },
+
+  nomePasseio: {
+    color: cores.branco,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+
+  descricao: {
+    color: cores.textoSuave,
+    fontSize: 13,
+    marginTop: 2,
+  },
+
+  valorPasseio: {
+    color: cores.destaque,
+    fontSize: 14,
+    fontWeight: '700',
+  },
+
+  dica: {
+    color: cores.textoSuave,
+    fontSize: 12,
+    marginTop: 2,
+  },
+
+  formulario: {
+    marginTop: 26,
+  },
+
+  label: {
+    color: cores.textoSuave,
+    fontSize: 13,
+    marginBottom: 6,
+    marginTop: 18,
+  },
+
+  input: {
+    backgroundColor: cores.cartao,
+    borderWidth: 1,
+    borderColor: cores.borda,
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    fontSize: 16,
+    color: cores.branco,
   },
 
   inputDescricao: {
-    minHeight: 85,
+    minHeight: 100,
     textAlignVertical: 'top',
   },
 
-  botaoSalvar: {
-    backgroundColor: '#0177ff',
-    padding: 15,
-    borderRadius: 10,
-    marginTop: 22,
-  },
-
-  botaoCancelar: {
-    padding: 13,
+  botaoPrimario: {
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: cores.destaque,
     alignItems: 'center',
-    marginTop: 5,
+    justifyContent: 'center',
+    marginTop: 28,
   },
 
-  textoCancelar: {
-    color: '#667085',
-    fontWeight: 'bold',
-    fontSize: 14,
+  textoPrimario: {
+    color: cores.branco,
+    fontSize: 16,
+    fontWeight: '700',
   },
 
-  botaoAdicionar: {
-    backgroundColor: '#0177ff',
-    marginHorizontal: 18,
-    marginTop: 5,
-    marginBottom: 25,
-    padding: 16,
-    borderRadius: 12,
+  botaoContorno: {
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 1.5,
+    borderColor: cores.destaque,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 40,
+    marginTop: 12,
+  },
+
+  textoContorno: {
+    color: cores.destaque,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+
+  botaoPerigo: {
+    height: 50,
+    borderRadius: 25,
+    borderWidth: 1.5,
+    borderColor: cores.perigo,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 32,
+  },
+
+  textoPerigo: {
+    color: cores.perigo,
+    fontSize: 16,
+    fontWeight: '700',
   },
 });
