@@ -1,8 +1,9 @@
+
 import React, { useCallback, useState } from "react";
 import {
   Alert,
+  FlatList,
   Pressable,
-  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -11,7 +12,7 @@ import { router, useFocusEffect } from "expo-router";
 import { useBanco } from "../components/DatabaseProvider";
 import { listarViagensComTotal } from "../components/banco";
 import { cores } from "../components/tema";
- 
+
 type ViagemComTotal = {
   id: number;
   local: string;
@@ -19,19 +20,18 @@ type ViagemComTotal = {
   data_volta: string;
   valor_total: number;
 };
- 
+
 function formatarMoeda(valor: number) {
   return valor.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
 }
- 
+
 export default function Inicio() {
   const db = useBanco();
   const [viagens, setViagens] = useState<ViagemComTotal[]>([]);
- 
-  // Recarrega a lista toda vez que a tela volta a aparecer
+
   useFocusEffect(
     useCallback(() => {
       try {
@@ -42,72 +42,87 @@ export default function Inicio() {
       }
     }, [db])
   );
- 
-  return (
-    <ScrollView
-      style={estilos.tela}
-      contentContainerStyle={estilos.conteudo}
-    >
-      <Text style={estilos.secao}>Viagens cadastradas</Text>
- 
-      {viagens.length === 0 ? (
-        <Text style={estilos.vazio}>
-          Você ainda não cadastrou nenhuma viagem. Toque em "Criar nova
-          viagem" para começar.
-        </Text>
-      ) : (
-        <View style={estilos.lista}>
-          {viagens.map((viagem) => (
-            <Pressable
-              key={viagem.id}
-              style={({ pressed }) => [
-                estilos.cartao,
-                pressed && { opacity: 0.85 },
-              ]}
-              onPress={() =>
-                router.push({
-                  pathname: "/Passeios",
-                  params: { id: String(viagem.id) },
-                })
-              }
-            >
-              <View style={estilos.topo}>
-                <Text style={estilos.local} numberOfLines={1}>
-                  {viagem.local}
-                </Text>
-                <Text style={estilos.valor}>
-                  {formatarMoeda(viagem.valor_total)}
-                </Text>
-              </View>
- 
-              <View style={estilos.base}>
-                <View>
-                  <Text style={estilos.rotulo}>Ida</Text>
-                  <Text style={estilos.data}>{viagem.data_ida}</Text>
-                </View>
- 
-                <View>
-                  <Text style={estilos.rotulo}>Volta</Text>
-                  <Text style={estilos.data}>{viagem.data_volta}</Text>
-                </View>
- 
-                <Text style={estilos.detalhes}>{"Detalhes >"}</Text>
-              </View>
-            </Pressable>
-          ))}
-        </View>
-      )}
- 
+
+  function renderItem({ item }: { item: ViagemComTotal }) {
+    return (
       <Pressable
-        style={({ pressed }) => [estilos.criar, pressed && { opacity: 0.85 }]}
-        onPress={() => router.push("/Lista")}
+        style={({ pressed }) => [
+          estilos.cartao,
+          pressed && estilos.cartaoPressionado,
+        ]}
+        onPress={() =>
+          router.push({
+            pathname: "/Passeios",
+            params: { id: String(item.id) },
+          })
+        }
       >
-        <Text style={estilos.criarTexto}>+ Criar nova viagem</Text>
+        <View style={estilos.topo}>
+          <Text style={estilos.local} numberOfLines={1}>
+            {item.local}
+          </Text>
+
+          <Text style={estilos.valor}>
+            {formatarMoeda(item.valor_total)}
+          </Text>
+        </View>
+
+        <View style={estilos.base}>
+          <View>
+            <Text style={estilos.rotulo}>Ida</Text>
+            <Text style={estilos.data}>{item.data_ida}</Text>
+          </View>
+
+          <View>
+            <Text style={estilos.rotulo}>Volta</Text>
+            <Text style={estilos.data}>{item.data_volta}</Text>
+          </View>
+
+          <Text style={estilos.detalhes}>{"Detalhes >"}</Text>
+        </View>
       </Pressable>
-    </ScrollView>
+    );
+  }
+
+  return (
+    <View style={estilos.tela}>
+      <FlatList
+        data={viagens}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={renderItem}
+        contentContainerStyle={estilos.conteudo}
+        ItemSeparatorComponent={() => (
+          <View style={estilos.separador} />
+        )}
+        ListHeaderComponent={
+          <Text style={estilos.secao}>
+            Viagens cadastradas
+          </Text>
+        }
+        ListEmptyComponent={
+          <Text style={estilos.vazio}>
+            Você ainda não cadastrou nenhuma viagem. Toque em
+            "Criar nova viagem" para começar.
+          </Text>
+        }
+        ListFooterComponent={
+          <Pressable
+            style={({ pressed }) => [
+              estilos.criar,
+              pressed && estilos.cartaoPressionado,
+            ]}
+            onPress={() => router.push("/Lista")}
+          >
+            <Text style={estilos.criarTexto}>
+              + Criar nova viagem
+            </Text>
+          </Pressable>
+        }
+      />
+    </View>
   );
 }
- 
+
 const estilos = StyleSheet.create({
   tela: {
     flex: 1,
@@ -116,6 +131,7 @@ const estilos = StyleSheet.create({
   conteudo: {
     padding: 16,
     paddingBottom: 40,
+    flexGrow: 1,
   },
   secao: {
     color: cores.destaque,
@@ -128,8 +144,8 @@ const estilos = StyleSheet.create({
     fontSize: 15,
     lineHeight: 22,
   },
-  lista: {
-    gap: 12,
+  separador: {
+    height: 12,
   },
   cartao: {
     backgroundColor: cores.cartao,
@@ -137,6 +153,9 @@ const estilos = StyleSheet.create({
     borderColor: cores.borda,
     borderRadius: 14,
     padding: 16,
+  },
+  cartaoPressionado: {
+    opacity: 0.85,
   },
   topo: {
     flexDirection: "row",
@@ -190,5 +209,3 @@ const estilos = StyleSheet.create({
     fontWeight: "700",
   },
 });
- 
- 
