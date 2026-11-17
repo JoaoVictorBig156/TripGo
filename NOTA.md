@@ -4,9 +4,9 @@
 
 ## Nota PAM I — TripGo (viagens)
 
-![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=B&color=yellow)
+![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=MB&color=green)
 
-**Nota atual: B** · 72% (72/100 pontos) · rodada de 2026-11-17 02:58:48 · commit `14591dd`
+**Nota atual: MB** · 75% (75/100 pontos) · rodada de 2026-11-17 03:02:41 · commit `4982739`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -15,7 +15,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 | Fase 1 — Estrutura | 1x (10 pts) | 8/10 | em desenvolvimento |
 | Fase 2 — AsyncStorage | 1x (15 pts) | 11/15 | em desenvolvimento |
 | Fase 3 — SQLite | 2x (30 pts) | 26/30 | em desenvolvimento |
-| Fase 4 — Versão Final (SQLite + UX + Dispositivo) | 3x (45 pts) | 27/45 | em desenvolvimento |
+| Fase 4 — Versão Final (SQLite + UX + Dispositivo) | 3x (45 pts) | 30/45 | em desenvolvimento |
 
 ## Resumo dos Testes Funcionais (Execução Real em Runtime Node + SQLite)
 
@@ -78,7 +78,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+2 pts)** Usa async/await corretamente (mais de 2 await) — `app/Lista.tsx`
 - [x] **(+2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
 
-### Fase 4 — Versão Final: SQLite Exclusivo, UX, Dispositivo e Entrega (27/45 pts · peso 3x)
+### Fase 4 — Versão Final: SQLite Exclusivo, UX, Dispositivo e Entrega (30/45 pts · peso 3x)
 
 - [x] **(+3 pts)** SQLite exclusivo: fluxo das telas usa SQLite sem depender de AsyncStorage p/ dados críticos — `components/DatabaseProvider.tsx (telas sem AsyncStorage crítico)`
 - [ ] **(+3 pts)** [Teste Funcional SQLite] Banco abre e cria a(s) tabela(s) em memória (CREATE TABLE) — `FALTA criar tabela real no SQLite em execução`
@@ -93,7 +93,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+3 pts)** UX: Mensagem de erro amigável se falhar ao CARREGAR dados (try/catch com feedback) — `app/Lista.tsx`
 - [x] **(+3 pts)** UX: Mensagem de erro amigável e validação se falhar ao SALVAR/EXCLUIR (try/catch + Alert/.trim) — `app/Lista.tsx + validação .trim()`
 - [x] **(+3 pts)** Organização do código: separação em pastas por responsabilidade (screens/app, database/data, components) — `pastas: app, components`
-- [ ] **(+3 pts)** Interface consistente: FlatList (keyExtractor + renderItem) e estilização StyleSheet.create — `FALTA FlatList com keyExtractor/renderItem e StyleSheet.create consistente`
+- [x] **(+3 pts)** Interface consistente: FlatList (keyExtractor + renderItem) e estilização StyleSheet.create — `app/index.tsx (4 arquivos com StyleSheet)`
 - [x] **(+3 pts)** Entrega: repositório limpo (.gitignore sem node_modules) e README com instruções/Expo Go/APK — `README.md (61 linhas) + .gitignore`
 
 ## Para evoluir a nota
