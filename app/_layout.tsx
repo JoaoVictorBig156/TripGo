@@ -1,7 +1,17 @@
 import { Stack } from 'expo-router';
+import * as Notifications from 'expo-notifications';
 import { StatusBar } from 'expo-status-bar';
 import { DatabaseProvider } from '../components/DatabaseProvider';
 import { cores } from '../components/tema';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowBanner: true,
+    shouldShowList: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
  
 export default function Layout() {
   return (
