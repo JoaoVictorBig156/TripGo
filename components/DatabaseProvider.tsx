@@ -1,10 +1,18 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import * as SQLite from 'expo-sqlite';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { criarTabelas } from './banco';
+import { cores } from './tema';
 
 const BancoContext = createContext<SQLite.SQLiteDatabase | null>(null);
+
+// Só o visual das telas de carregamento/erro mudou (fundo escuro)
+const estiloTela = {
+  flex: 1,
+  justifyContent: 'center' as const,
+  alignItems: 'center' as const,
+  backgroundColor: cores.fundo,
+};
 
 export function DatabaseProvider({ children }: { children: React.ReactNode }) {
   const [db, setDb] = useState<SQLite.SQLiteDatabase | null>(null);
@@ -31,17 +39,19 @@ export function DatabaseProvider({ children }: { children: React.ReactNode }) {
 
   if (erro) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Erro ao abrir o banco de dados.</Text>
+      <View style={estiloTela}>
+        <Text style={{ color: cores.branco }}>Erro ao abrir o banco de dados.</Text>
       </View>
     );
   }
 
   if (!db) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <ActivityIndicator size="large" />
-        <Text>Carregando banco de dados...</Text>
+      <View style={estiloTela}>
+        <ActivityIndicator size="large" color={cores.destaque} />
+        <Text style={{ color: cores.textoSuave, marginTop: 12 }}>
+          Carregando banco de dados...
+        </Text>
       </View>
     );
   }
