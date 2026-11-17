@@ -1,6 +1,6 @@
- 
+
 import React, { useState } from "react";
- 
+
 import {
   View,
   Text,
@@ -10,20 +10,25 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
- 
+
 import { router } from "expo-router";
 import { useBanco } from "../components/DatabaseProvider";
 import { adicionarViagem } from "../components/banco";
 import { cores } from "../components/tema";
- 
+
+import {
+  solicitarPermissaoNotificacoes,
+  notificarViagem,
+} from "../components/notificacoes";
+
 export default function Lista() {
   const db = useBanco();
- 
+
   const [local, setLocal] = useState("");
   const [dataDeIda, setDataIda] = useState("");
   const [dataDeVolta, setDataVolta] = useState("");
   const [salvando, setSalvando] = useState(false);
- 
+
   async function adicionarItem() {
     if (
       local.trim() === "" ||
@@ -33,34 +38,63 @@ export default function Lista() {
       Alert.alert("Atenção", "Preencha todos os campos.");
       return;
     }
- 
+
     if (salvando) return;
- 
+
     try {
       setSalvando(true);
- 
+
+      // Salva a viagem no banco de dados
       await adicionarViagem(
         db,
         local.trim(),
         dataDeIda.trim(),
         dataDeVolta.trim()
       );
- 
-      Alert.alert("Sucesso", "Viagem cadastrada!");
- 
+
+      // Tenta enviar a notificação separadamente
+      let notificacaoEnviada = false;
+
+      try {
+        const permissaoConcedida =
+          await solicitarPermissaoNotificacoes();
+
+        if (permissaoConcedida) {
+          await notificarViagem(local.trim());
+          notificacaoEnviada = true;
+        }
+      } catch (erroNotificacao) {
+        console.warn(
+          "Não foi possível enviar a notificação:",
+          erroNotificacao
+        );
+      }
+
+      // A viagem já foi salva, independentemente da notificação
+      Alert.alert(
+        "Sucesso",
+        notificacaoEnviada
+          ? "Viagem cadastrada! Uma notificação foi enviada."
+          : "Viagem cadastrada! As notificações não estão autorizadas neste dispositivo."
+      );
+
       setLocal("");
       setDataIda("");
       setDataVolta("");
- 
+
       router.back();
     } catch (error) {
       console.error("Erro ao cadastrar viagem:", error);
-      Alert.alert("Erro", "Não foi possível cadastrar a viagem.");
+
+      Alert.alert(
+        "Erro",
+        "Não foi possível cadastrar a viagem."
+      );
     } finally {
       setSalvando(false);
     }
   }
- 
+
   return (
     <ScrollView
       style={styles.container}
@@ -70,6 +104,7 @@ export default function Lista() {
       <View style={styles.caixasDePerguntas}>
         <View>
           <Text style={styles.rotulo}>Local de destino</Text>
+
           <TextInput
             style={styles.input}
             value={local}
@@ -78,9 +113,10 @@ export default function Lista() {
             placeholderTextColor={cores.textoSuave}
           />
         </View>
- 
+
         <View>
           <Text style={styles.rotulo}>Data de ida</Text>
+
           <TextInput
             style={styles.input}
             value={dataDeIda}
@@ -89,9 +125,10 @@ export default function Lista() {
             placeholderTextColor={cores.textoSuave}
           />
         </View>
- 
+
         <View>
           <Text style={styles.rotulo}>Data de volta</Text>
+
           <TextInput
             style={styles.input}
             value={dataDeVolta}
@@ -101,7 +138,7 @@ export default function Lista() {
           />
         </View>
       </View>
- 
+
       <View style={styles.posicaoBotao}>
         <Pressable
           style={[
@@ -115,39 +152,41 @@ export default function Lista() {
             {salvando ? "Salvando..." : "Adicionar viagem"}
           </Text>
         </Pressable>
- 
+
         <Pressable
           style={styles.botaoCancelar}
           onPress={() => router.back()}
         >
-          <Text style={styles.textoCancelar}>Cancelar</Text>
+          <Text style={styles.textoCancelar}>
+            Cancelar
+          </Text>
         </Pressable>
       </View>
     </ScrollView>
   );
 }
- 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: cores.fundo,
   },
- 
+
   conteudo: {
     padding: 16,
     paddingBottom: 40,
   },
- 
+
   caixasDePerguntas: {
     gap: 18,
   },
- 
+
   rotulo: {
     color: cores.textoSuave,
     fontSize: 13,
     marginBottom: 6,
   },
- 
+
   input: {
     backgroundColor: cores.cartao,
     borderWidth: 1,
@@ -158,12 +197,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: cores.branco,
   },
- 
+
   posicaoBotao: {
     marginTop: 32,
     gap: 12,
   },
- 
+
   botao: {
     height: 50,
     backgroundColor: cores.destaque,
@@ -171,17 +210,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
- 
+
   botaoDesativado: {
     opacity: 0.6,
   },
- 
+
   detalhes: {
     color: cores.branco,
     fontSize: 16,
     fontWeight: "700",
   },
- 
+
   botaoCancelar: {
     height: 50,
     borderRadius: 25,
@@ -190,12 +229,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
- 
+
   textoCancelar: {
     color: cores.destaque,
     fontSize: 16,
     fontWeight: "700",
   },
 });
- 
- 
