@@ -5,7 +5,7 @@
 
 [![CI](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml/badge.svg)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml) [![Nota](https://img.shields.io/badge/Nota%20PAM%20I-B-yellow)](https://github.com/JoaoVictorBig156/TripGo/actions/workflows/pam-ci.yml)
 
-**B** — Bom · **68%** (68/100 pontos) · atualizado em 2026-11-17 02:56
+**B** — Bom · **68%** (68/100 pontos) · atualizado em 2026-11-17 02:57
 
 | Fase | Pontos |
 |------|--------|
