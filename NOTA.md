@@ -6,7 +6,7 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=B&color=yellow)
 
-**Nota atual: B** · 66% (66/100 pontos) · rodada de 2026-11-17 02:31:39 · commit `1b42db6`
+**Nota atual: B** · 66% (66/100 pontos) · rodada de 2026-11-17 02:56:09 · commit `4996c81`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
@@ -75,7 +75,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+2 pts)** Tela de lista carrega dados do banco — `app/Lista.tsx`
 - [ ] **(+2 pts)** Formulário salva no banco (INSERT/runAsync/runSync) — `—`
 - [ ] **(+2 pts)** Detalhe busca no banco com WHERE/SELECT — `—`
-- [x] **(+2 pts)** Usa async/await corretamente (mais de 2 await) — `components/DatabaseProvider.tsx`
+- [x] **(+2 pts)** Usa async/await corretamente (mais de 2 await) — `app/Lista.tsx`
 - [x] **(+2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
 
 ### Fase 4 — Versão Final: SQLite Exclusivo, UX, Dispositivo e Entrega (21/45 pts · peso 3x)
