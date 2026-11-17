@@ -6,16 +6,16 @@
 
 ![](https://img.shields.io/static/v1?label=Nota%20PAM%20I&message=B&color=yellow)
 
-**Nota atual: B** · 68% (68/100 pontos) · rodada de 2026-11-17 02:57:40 · commit `bb1347e`
+**Nota atual: B** · 72% (72/100 pontos) · rodada de 2026-11-17 02:58:48 · commit `14591dd`
 
 Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–75%) · MB = Muito bom (75–100%)
 
 | Fase | Peso | Pontos | Situação |
 |---|---|---|---|
-| Fase 1 — Estrutura | 1x (10 pts) | 7/10 | em desenvolvimento |
+| Fase 1 — Estrutura | 1x (10 pts) | 8/10 | em desenvolvimento |
 | Fase 2 — AsyncStorage | 1x (15 pts) | 11/15 | em desenvolvimento |
 | Fase 3 — SQLite | 2x (30 pts) | 26/30 | em desenvolvimento |
-| Fase 4 — Versão Final (SQLite + UX + Dispositivo) | 3x (45 pts) | 24/45 | em desenvolvimento |
+| Fase 4 — Versão Final (SQLite + UX + Dispositivo) | 3x (45 pts) | 27/45 | em desenvolvimento |
 
 ## Resumo dos Testes Funcionais (Execução Real em Runtime Node + SQLite)
 
@@ -29,7 +29,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 
 ## Checklist validado
 
-### Fase 1 — Estrutura do projeto (7/10 pts · peso 1x)
+### Fase 1 — Estrutura do projeto (8/10 pts · peso 1x)
 
 - [x] **(+1 pts)** README.md existe e fala do projeto/grupo — `README.md`
 - [x] **(+1 pts)** Arquivo principal do app existe (app/index.tsx) — `app/index.tsx`
@@ -38,7 +38,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+1 pts)** Existem dados iniciais (seed) em arquivo de dados — `components/funcoes_lista.ts`
 - [ ] **(+1 pts)** Existe tela de FORMULÁRIO — `—`
 - [ ] **(+1 pts)** Existe tela de DETALHE — `—`
-- [ ] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `expo-notifications`
+- [x] **(+1 pts)** Dependências importadas existem no package.json (app não quebra ao abrir) — `todos os imports resolvem`
 - [x] **(+1 pts)** app.json identifica o app (name/slug preenchidos) — `app.json`
 - [x] **(+1 pts)** Projeto tem pelo menos 2 arquivos de tela/código — `6 arquivos de tela`
 
@@ -78,7 +78,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [x] **(+2 pts)** Usa async/await corretamente (mais de 2 await) — `app/Lista.tsx`
 - [x] **(+2 pts)** Banco possui dados iniciais (seed inserido em SQL) — `components/banco.tsx`
 
-### Fase 4 — Versão Final: SQLite Exclusivo, UX, Dispositivo e Entrega (24/45 pts · peso 3x)
+### Fase 4 — Versão Final: SQLite Exclusivo, UX, Dispositivo e Entrega (27/45 pts · peso 3x)
 
 - [x] **(+3 pts)** SQLite exclusivo: fluxo das telas usa SQLite sem depender de AsyncStorage p/ dados críticos — `components/DatabaseProvider.tsx (telas sem AsyncStorage crítico)`
 - [ ] **(+3 pts)** [Teste Funcional SQLite] Banco abre e cria a(s) tabela(s) em memória (CREATE TABLE) — `FALTA criar tabela real no SQLite em execução`
@@ -86,7 +86,7 @@ Legenda: I = Insuficiente (0–25%) · R = Regular (25–50%) · B = Bom (50–7
 - [ ] **(+3 pts)** [Teste Funcional SQLite] Fluxo de LISTAR e FILTRAR retorna dados reais (SELECT + WHERE) — `FALTA consulta SELECT/WHERE funcional no SQLite`
 - [ ] **(+3 pts)** [Teste Funcional SQLite] Fluxo de EDITAR atualiza registro existente no banco (UPDATE) — `FALTA função de editar (UPDATE) alterando registro real no SQLite`
 - [ ] **(+3 pts)** [Teste Funcional SQLite] Fluxo de EXCLUIR remove registro do banco (DELETE FROM) — `FALTA função de excluir (DELETE FROM) removendo registro real no SQLite`
-- [ ] **(+3 pts)** Recurso do dispositivo: pacote nativo no package.json (notifications, image-picker, location) ou justificativa — `FALTA instalar expo-notifications / expo-image-picker / expo-location (ou justificar no README)`
+- [x] **(+3 pts)** Recurso do dispositivo: pacote nativo no package.json (notifications, image-picker, location) ou justificativa — `expo-notifications`
 - [x] **(+3 pts)** Recurso do dispositivo: uso da API nativa no código (notificação, foto ou GPS) ou justificativa — `app/_layout.tsx`
 - [x] **(+3 pts)** UX: Loading ao carregar a lista do SQLite (ActivityIndicator + estado loading/carregando) — `app/Passeios.tsx (app/Passeios.tsx)`
 - [x] **(+3 pts)** UX: Empty State quando não houver registros (mensagem amigável + ícone/emoji/ilustração) — `app/Passeios.tsx`
