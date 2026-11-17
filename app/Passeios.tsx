@@ -17,12 +17,13 @@ import { useBanco } from '../components/DatabaseProvider';
 import { cores } from '../components/tema';
 
 import {
-  listarViagens,
+  buscarViagemPorId,
   listarPasseios,
   adicionarPasseio,
   atualizarPasseio,
   excluirPasseio,
   excluirViagem,
+  atualizarViagem,
   calcularTotal,
 } from '../components/banco';
 
@@ -68,6 +69,10 @@ export default function Passeios() {
 
   const [idEdicao, setIdEdicao] = useState<number | null>(null);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [editarDadosViagem, setEditarDadosViagem] = useState(false);
+  const [localEditado, setLocalEditado] = useState('');
+  const [idaEditada, setIdaEditada] = useState('');
+  const [voltaEditada, setVoltaEditada] = useState('');
 
   // Carregar dados da viagem e dos passeios
 
@@ -80,11 +85,7 @@ export default function Passeios() {
         return;
       }
 
-      const viagens = listarViagens(db);
-
-      const viagemEncontrada = viagens.find(
-        (item: Viagem) => item.id === idViagem
-      );
+      const viagemEncontrada = buscarViagemPorId(db, idViagem);
 
       setViagem(viagemEncontrada ?? null);
 
@@ -105,6 +106,37 @@ export default function Passeios() {
       carregarDados();
     }, [carregarDados])
   );
+
+  function iniciarEdicaoViagem() {
+    if (!viagem) return;
+    setLocalEditado(viagem.local);
+    setIdaEditada(viagem.data_ida);
+    setVoltaEditada(viagem.data_volta);
+    setEditarDadosViagem(true);
+  }
+
+  function salvarEdicaoViagem() {
+    if (!localEditado.trim() || !idaEditada.trim() || !voltaEditada.trim()) {
+      Alert.alert('Atenção', 'Preencha todos os campos da viagem.');
+      return;
+    }
+
+    try {
+      atualizarViagem(
+        db,
+        idViagem,
+        localEditado.trim(),
+        idaEditada.trim(),
+        voltaEditada.trim()
+      );
+      setEditarDadosViagem(false);
+      carregarDados();
+      Alert.alert('Sucesso', 'Viagem atualizada!');
+    } catch (error) {
+      console.error('Erro ao atualizar viagem:', error);
+      Alert.alert('Erro', 'Não foi possível atualizar a viagem.');
+    }
+  }
 
   // Limpar formulário
 
@@ -282,6 +314,28 @@ export default function Passeios() {
       {/* Cabeçalho da viagem */}
 
       <Text style={styles.titulo}>{viagem.local}</Text>
+
+      {!editarDadosViagem ? (
+        <Pressable onPress={iniciarEdicaoViagem} style={styles.linkEditarViagem}>
+          <Text style={styles.adicionar}>Editar dados da viagem</Text>
+        </Pressable>
+      ) : (
+        <View style={styles.formulario}>
+          <Text style={styles.tituloSecao}>Editar viagem</Text>
+          <Text style={styles.label}>Destino</Text>
+          <TextInput style={styles.input} value={localEditado} onChangeText={setLocalEditado} placeholder="Destino" placeholderTextColor={cores.textoSuave} />
+          <Text style={styles.label}>Data de ida</Text>
+          <TextInput style={styles.input} value={idaEditada} onChangeText={setIdaEditada} placeholder="DD/MM/AAAA" placeholderTextColor={cores.textoSuave} />
+          <Text style={styles.label}>Data de volta</Text>
+          <TextInput style={styles.input} value={voltaEditada} onChangeText={setVoltaEditada} placeholder="DD/MM/AAAA" placeholderTextColor={cores.textoSuave} />
+          <Pressable style={styles.botaoPrimario} onPress={salvarEdicaoViagem}>
+            <Text style={styles.textoPrimario}>Salvar viagem</Text>
+          </Pressable>
+          <Pressable style={styles.botaoContorno} onPress={() => setEditarDadosViagem(false)}>
+            <Text style={styles.textoContorno}>Cancelar</Text>
+          </Pressable>
+        </View>
+      )}
 
       <View style={styles.selo}>
         <Text style={styles.seloTexto}>Minha viagem</Text>
@@ -616,6 +670,12 @@ const styles = StyleSheet.create({
     color: cores.textoSuave,
     fontSize: 12,
     marginTop: 2,
+  },
+
+  linkEditarViagem: {
+    alignSelf: 'flex-start',
+    marginTop: 8,
+    marginBottom: 8,
   },
 
   formulario: {
